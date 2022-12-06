@@ -12,16 +12,38 @@ searching for book title can be the main/home page
 */
 
 function App() {
-  const [search, setSearch] = useState("Title");
+  const [searchType, setSearchType] = useState("Title");
+  const [search, setSearch] = useState("");
 
+  const getPlaceholder = () => {
+    switch(searchType){
+      case "Genre":
+        return "Enter genre...";
+      case "Author":
+        return "Enter author name...";
+      default:
+        return "Enter book title...";
+    }
+  }
+  
   return (
     <div className="App">
-      <Dropdown 
-      search={search}
-      setSearch={setSearch}
-      menu={["Title", "Genre", "Author"]}
-      />
-      {/*<SearchBar placeholder="Enter a book name..." />*/}
+      <div className="flex-container">
+        <div className="flex-child appDropdown">
+          <Dropdown 
+          searchType={searchType}
+          setSearchType={setSearchType}
+          menu={["Title", "Genre", "Author"]}
+          />
+        </div>
+        <div className="flex-child appSearchBar">
+          <SearchBar 
+          placeholder={getPlaceholder()}
+          setSearch={setSearch} />
+        </div>
+      </div>
+      <div>{search}</div>
+      
     </div>
     
   );

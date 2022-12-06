@@ -1,13 +1,15 @@
 .dropdown-button{
     box-sizing: border-box;
-    height: 36px;
+    height: 60px;
     width: 150px;
     background-color: rgb(49, 94, 59);
     color: white;
     border: 1px solid grey;
-    border-radius: 1px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
     font: inherit;
-    font-size: medium;
+    font-size: 18px;
     text-align: left;
     cursor: pointer;
   }
@@ -25,8 +27,10 @@
     margin: 0px 0;
     padding: 0;
     border: 1px solid grey;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
     width: 148px;
-    font-size: medium;
+    font-size: 18px;
   }
   
   .menu > li:hover{

@@ -3,7 +3,7 @@ import './Dropdown.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-function Dropdown({menu, search, setSearch}) {
+function Dropdown({menu, searchType, setSearchType}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
@@ -13,7 +13,7 @@ function Dropdown({menu, search, setSearch}) {
     <div className="dropdown">
         <button className="dropdown-button" onClick={handleOpen}>
             <div className="dropdown-text">
-                <div>{search}</div>
+                <div>{searchType}</div>
                 <div className="material-icons">
                     {!open ? (<ExpandMoreIcon />) : <ExpandLessIcon/>}
                 </div>
@@ -26,7 +26,7 @@ function Dropdown({menu, search, setSearch}) {
                         <button
                         onClick={() => {
                             handleOpen();
-                            setSearch(menuItem);
+                            setSearchType(menuItem);
                         }}
                         >
                             {menuItem}
