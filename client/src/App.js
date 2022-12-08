@@ -26,9 +26,9 @@ function App() {
       <Router>
         <Navbar className="appNavbar"/>
         <Routes>
-          <Route path='/'exact element={<Home />} />
+          <Route path='/'exact element={<Home/>}></Route>
           <Route path='/favorites' element={<Favorite/>}></Route>
-          <Route path='/search' element={Search}></Route>
+          <Route path='/search' element={<Search/>}></Route>
         </Routes>
       </Router>
     </div>

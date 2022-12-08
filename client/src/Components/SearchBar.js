@@ -2,28 +2,26 @@ import React from 'react';
 import './SearchBar.css';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchWord } from '../Features/SearchWord';
 
 /*
 Might help with what I want to do with searching
 https://stackoverflow.com/questions/72923507/navigate-to-a-search-page-after-a-search-in-the-search-bar-and-reuse-the-search
 */
 
-function SearchBar({placeholder, setSearch}){
+function SearchBar({placeholder}){
     var curSearch;
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleChange = (event) => {
         curSearch = event.target.value;
     }
 
     const handleClick = () =>{
-        setSearch(curSearch);
-        if(curSearch){
-            navigate("/search", { state: curSearch, replace: true });
-        }
-        console.log(curSearch);
+        dispatch(setSearchWord({searchWord: encodeURI(curSearch)}));
     }
-    
+
     return (
         <div className="search">
             <div className="searchInputs">
@@ -31,7 +29,9 @@ function SearchBar({placeholder, setSearch}){
                   <input type="text" placeholder={placeholder} onChange={handleChange}/>  
                 </div>
                 <div className="searchInput searchIcon" onClick={handleClick}>
-                    <SearchIcon />
+                    <Link style={{textDecoration: 'none'}} to='/search'>
+                       <SearchIcon /> 
+                    </Link>
                 </div>
                 
             </div>

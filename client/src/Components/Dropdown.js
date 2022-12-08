@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import './Dropdown.css';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSearchType } from '../Features/SearchType';
 
-function Dropdown({menu, searchType, setSearchType}) {
+function Dropdown({menu/*, searchType, setSearchType*/}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
   }  
 
+  const dispatch = useDispatch();
+  const searchType = useSelector((state) => state.searchType.value);
+
   return (
     <div className="dropdown">
         <button className="dropdown-button" onClick={handleOpen}>
             <div className="dropdown-text">
-                <div>{searchType}</div>
+                <div>{searchType.searchType}</div>
                 <div className="material-icons">
                     {!open ? (<ExpandMoreIcon />) : <ExpandLessIcon/>}
                 </div>
@@ -26,7 +31,8 @@ function Dropdown({menu, searchType, setSearchType}) {
                         <button
                         onClick={() => {
                             handleOpen();
-                            setSearchType(menuItem);
+                            dispatch(setSearchType({searchType: menuItem}));
+                            //setSearchType(menuItem);
                         }}
                         >
                             {menuItem}
