@@ -3,20 +3,19 @@ import '../../App.css';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Search() {
+  const searchWord = useSelector((state) => state.searchWord.value);
+  const searchType = useSelector((state) => state.searchType.value);
+
   const [backendData, setBackendData] = useState([{}])
-  /*psuedocode*/
-  /*useEffect(() => {
-    fetch("/search/{searchType}/searchWord").then(
+  useEffect(() => {
+    fetch(`/search/${searchType.searchType}/${searchWord.searchWord}`).then(
       response => response.json()
     ).then(
       data => {
         setBackendData(data);
       } 
     )
-  }, []);*/
-
-  const searchWord = useSelector((state) => state.searchWord.value);
-  const searchType = useSelector((state) => state.searchType.value);
+  }, []);
 
   return (
     <span className="font-link">

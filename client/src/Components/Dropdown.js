@@ -5,7 +5,7 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchType } from '../Features/SearchType';
 
-function Dropdown({menu/*, searchType, setSearchType*/}) {
+function Dropdown({menu}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
@@ -32,7 +32,6 @@ function Dropdown({menu/*, searchType, setSearchType*/}) {
                         onClick={() => {
                             handleOpen();
                             dispatch(setSearchType({searchType: menuItem}));
-                            //setSearchType(menuItem);
                         }}
                         >
                             {menuItem}

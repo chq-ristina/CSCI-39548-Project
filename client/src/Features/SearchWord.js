@@ -10,7 +10,6 @@ export const searchWordSlice = createSlice({
     }
 });
 
-
 export const {setSearchWord} = searchWordSlice.actions;
 export default searchWordSlice.reducer;
 
