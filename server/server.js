@@ -10,7 +10,7 @@ app.get("/search/Title/:title", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&key=AIzaSyAM-J46JtsWp2T4JeTjZnsIdX739DQDtgg`);
+    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`);
     const book = await rawData.json();
     
     let total = book.totalItems;
@@ -42,7 +42,7 @@ app.get("/search/Author/:author", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&key=AIzaSyAM-J46JtsWp2T4JeTjZnsIdX739DQDtgg`);
+    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}`);
     const book = await rawData.json();
     
     let total = book.totalItems;
@@ -74,7 +74,7 @@ app.get("/search/Genre/:genre", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&key=AIzaSyAM-J46JtsWp2T4JeTjZnsIdX739DQDtgg`);
+    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}`);
     const book = await rawData.json();
     
     let total = book.totalItems;
