@@ -28,6 +28,10 @@ function Search() {
   /*backendData.forEach((book) =>{
     console.log(book);
   })*/
+
+  //backendData && Object.keys(backendData).length === 0 && Object.getPrototypeOf(backendData) === Object.prototype
+
+
   return (
     <span className="font-link">
     <div className='search-Search'>
@@ -36,11 +40,11 @@ function Search() {
       ): (
         backendData.map((book, key) =>{
           let authorString = "";
-
-          let title = book.title;
-          let authors = book.author;
-          let description = book.description;
-          let image = book.img;
+          
+          let title = book.title ? book.title : "No title";
+          let authors = book.author ? book.author : "No author";
+          let description = book.description ? book.description : "No description available";
+          let image = book.img ? book.img : "https://www.freeiconspng.com/uploads/no-image-icon-10.png";
 
           authors.forEach((author) => {
             author += ", ";
@@ -59,7 +63,7 @@ function Search() {
          return(
           <div key={key}>
             <div className='search-imgDescription'>
-              <img src = {image} />
+              <img src = {image} width="128" height="192"/>
               <p className="search-description">{description}</p>
             </div>
             <div className='search-words'>

@@ -17,14 +17,14 @@ app.get("/search/Title/:title", async (req, res) => {
     let maxBooks = Math.min(10, total);
     if(total > 0){
         let items = book.items; //list of all the books, probably will need to parse through the list
-        //res.send(items[0].volumeInfo.imageLinks.thumbnail);
+        
         for(var i = 0; i < maxBooks; i++){
             let item = items[i].volumeInfo;
             var data = new Object();
-            //res.send(item.imageLinks.thumbnail);
-            item.title ? (data.title = item.title): data.title = null;
-            item.authors ? (data.author = item.authors) : data.author = null;
-            item.description ? (data.description = item.description) : data.description = null;
+            
+            item.hasOwnProperty('title') ? (data.title = item.title): data.title = null;
+            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
@@ -49,14 +49,14 @@ app.get("/search/Author/:author", async (req, res) => {
     let maxBooks = Math.min(10, total);
     if(total > 0){
         let items = book.items; //list of all the books, probably will need to parse through the list
-        //res.send(items[0].volumeInfo.imageLinks.thumbnail);
+        
         for(var i = 0; i < maxBooks; i++){
             let item = items[i].volumeInfo;
             var data = new Object();
 
-            item.title ? (data.title = item.title): data.title = null;
-            item.authors ? (data.author = item.authors) : data.author = null;
-            item.description ? (data.description = item.description) : data.description = null;
+            item.hasOwnProperty('title') ? (data.title = item.title): data.title = null;
+            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
@@ -81,14 +81,14 @@ app.get("/search/Genre/:genre", async (req, res) => {
     let maxBooks = Math.min(10, total);
     if(total > 0){
         let items = book.items; //list of all the books, probably will need to parse through the list
-        //res.send(items[0].volumeInfo.imageLinks.thumbnail);
+        
         for(var i = 0; i < maxBooks; i++){
             let item = items[i].volumeInfo;
             var data = new Object();
 
-            item.title ? (data.title = item.title): data.title = null;
-            item.authors ? (data.author = item.authors) : data.author = null;
-            item.description ? (data.description = item.description) : data.description = null;
+            item.hasOwnProperty('title') ? (data.title = item.title): data.title = null;
+            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
