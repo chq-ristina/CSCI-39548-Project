@@ -21,11 +21,11 @@ app.get("/search/Title/:title", async (req, res) => {
         for(var i = 0; i < maxBooks; i++){
             let item = items[i].volumeInfo;
             var data = new Object();
-
+            //res.send(item.imageLinks.thumbnail);
             item.title ? (data.title = item.title): data.title = null;
             item.authors ? (data.author = item.authors) : data.author = null;
             item.description ? (data.description = item.description) : data.description = null;
-            items.imageLinks ? (data.img = items.imageLinks.thumbnail) : data.img = null;
+            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
 
@@ -57,7 +57,7 @@ app.get("/search/Author/:author", async (req, res) => {
             item.title ? (data.title = item.title): data.title = null;
             item.authors ? (data.author = item.authors) : data.author = null;
             item.description ? (data.description = item.description) : data.description = null;
-            items.imageLinks ? (data.img = items.imageLinks.thumbnail) : data.img = null;
+            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
 
@@ -89,7 +89,7 @@ app.get("/search/Genre/:genre", async (req, res) => {
             item.title ? (data.title = item.title): data.title = null;
             item.authors ? (data.author = item.authors) : data.author = null;
             item.description ? (data.description = item.description) : data.description = null;
-            items.imageLinks ? (data.img = items.imageLinks.thumbnail) : data.img = null;
+            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
             results.push(data);
 

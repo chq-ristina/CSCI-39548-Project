@@ -1,0 +1,45 @@
+.search-Search{
+    text-align: left;
+    padding: 50px;
+    /*margin-top: 50px;
+    margin-left: 10px;*/
+}
+
+.loading{
+    text-align: center;
+    color: black;
+    font-size: 75px;
+}
+
+.search-imgDescription{
+    display: flex;
+}
+
+.search-imgDescription img{
+    margin-right: 10px;
+    display: block;
+}
+
+.search-imgDescription p{
+    margin: 0;
+}
+
+.search-title{
+    /*background-color:white;*/
+    color:rgb(9, 86, 55);
+    
+}
+.search-description, .search-author{
+    color:rgb(52, 52, 52);
+}
+.search-author{
+    /*background-color:white;*/
+    padding-bottom: 10px;
+    font-weight: 1000;
+}
+
+.search-words{
+    /*background-color: pink;*/
+    margin:0px;
+    line-height: 1;
+}
