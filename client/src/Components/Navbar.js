@@ -15,7 +15,10 @@ function Navbar() {
             </span>
             <MenuBookIcon/>
           </Link>
-          <Link to='/favorites' className='navbar-favorite'>
+          <Link style={{textDecoration: 'none'}} to='/favorites' className='navbar-favorite'>
+            <span className="font-link">
+              Favorites  
+            </span>
             <FavoriteIcon/>
           </Link>
         </div>
