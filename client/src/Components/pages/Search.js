@@ -5,10 +5,14 @@ import './Search.css';
 import {isEmpty} from "lodash";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { addFavorite, addFavoriteInsert, addFavoriteRemove, removeFavorite } from '../../Features/Favoriting';
+import FavoriteButton from '../FavoriteButton';
 
 function Search() {
   const searchWord = useSelector((state) => state.searchWord.value);
   const searchType = useSelector((state) => state.searchType.value);
+  const toInsert = useSelector((state) => (state.favoriting.value.toInsert));
+  const toRemove = useSelector((state) => (state.favoriting.value.toRemove));
 
   const [backendData, setBackendData] = useState([{}])
   useEffect(() => {
@@ -56,7 +60,7 @@ function Search() {
                 <div key={key}>
                 <div className='search-imgDescription'>
                   <img src = {image} width="128" height="192"/>
-                  <button onClick={(e) => {
+                  {/*<button onClick={(e) => {
                     e.preventDefault();
                     console.log(key, title, authorString);
                     if(book.hasOwnProperty('favorite')){
@@ -65,11 +69,13 @@ function Search() {
                     else{
                       book.favorite = true
                     }
-
+                    updateFavorites(book);
                     book.favorite ? window.alert(`${title} added to favorites!`) : window.alert(`${title} removed from favorites!`);
                   }}>
                     {(book.hasOwnProperty('favorite') && book.favorite)? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-                  </button> 
+                </button>*/}
+                  <FavoriteButton
+                  props={book}/>
                   <p className="search-description">{description}</p>
                 </div>
                 <div className='search-words'>

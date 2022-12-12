@@ -7,11 +7,12 @@ import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import searchTypeReducer from './Features/SearchType';
 import SearchWordReducer from './Features/SearchWord';
-
+import favoritingReducer from './Features/Favoriting';
 const store = configureStore({
   reducer: {
     searchType: searchTypeReducer,
-    searchWord: SearchWordReducer
+    searchWord: SearchWordReducer,
+    favoriting: favoritingReducer
   }
 })
 
