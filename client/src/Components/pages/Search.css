@@ -24,11 +24,14 @@
     margin: 0;
 }
 
-button{
+.search-imgDescription button{
     background-color: #e5e6cc;
     border: none;
+    margin-top: 75px;
     padding-right: 10px;
     color:rgb(207, 57, 57);
+    cursor: pointer;
+    height: 25px;
 }
 
 .search-title{

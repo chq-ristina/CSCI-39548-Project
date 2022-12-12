@@ -9,7 +9,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 function Search() {
   const searchWord = useSelector((state) => state.searchWord.value);
   const searchType = useSelector((state) => state.searchType.value);
-  const dispatch = useDispatch();
 
   const [backendData, setBackendData] = useState([{}])
   useEffect(() => {
@@ -18,27 +17,8 @@ function Search() {
       const data = await response.json();
       setBackendData(data);
     }
-    /*fetch(`/search/${searchType.searchType}/${searchWord.searchWord}`).then(
-      response => response.json()
-    ).then(
-      data => setBackendData(data)
-    )*/
     fetchData();
   }, []);
-
-  //console.log(backendData);
-  //console.log(backendData[0].title);
-  /*backendData.forEach((book) =>{
-    console.log(book);
-  })*/
-
-  //backendData && Object.keys(backendData).length === 0 && Object.getPrototypeOf(backendData) === Object.prototype
-  const [open, setOpen] = useState(true);
-  
-  const handleOpen = ( )=> {
-    setOpen(!open);
-  } 
-
 
   return (
     <span className="font-link">
@@ -76,9 +56,19 @@ function Search() {
                 <div key={key}>
                 <div className='search-imgDescription'>
                   <img src = {image} width="128" height="192"/>
-                  <button data-id={key} onClick={handleOpen}>
-                    {open ? <FavoriteBorderIcon/> : <FavoriteIcon/>}
-                    {console.log(title)}
+                  <button onClick={(e) => {
+                    e.preventDefault();
+                    console.log(key, title, authorString);
+                    if(book.hasOwnProperty('favorite')){
+                      book.favorite = !book.favorite;
+                    }
+                    else{
+                      book.favorite = true
+                    }
+
+                    book.favorite ? window.alert(`${title} added to favorites!`) : window.alert(`${title} removed from favorites!`);
+                  }}>
+                    {(book.hasOwnProperty('favorite') && book.favorite)? <FavoriteIcon/> : <FavoriteBorderIcon/>}
                   </button> 
                   <p className="search-description">{description}</p>
                 </div>
