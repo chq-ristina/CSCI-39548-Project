@@ -38,7 +38,7 @@ function FavoriteButton(props) {
         })
     },[])*/
 
-    async function updateFavorites(book) {
+    /*async function updateFavorites(book) {
         var data = new FormData();
         data.append("json", JSON.stringify(book));
         if(!favorited){
@@ -60,7 +60,7 @@ function FavoriteButton(props) {
             addFavoriteRemove(book);
             setFavorited(false);
         }*/
-      }
+      //}
 
   return (<button onClick={(e) => {
         e.preventDefault();
@@ -73,7 +73,7 @@ function FavoriteButton(props) {
           props.favorite = true;
           Object.preventExtensions(props);
         }*/
-        updateFavorites(props.props);
+        //updateFavorites(props.props);
         !favorited ? window.alert(`${props.props.title} added to favorites!`) : window.alert(`${props.props.title} removed from favorites!`);
       }}>
     {(favorited)? <FavoriteIcon/> : <FavoriteBorderIcon/>}

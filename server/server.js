@@ -1,6 +1,9 @@
 const express = require('express')
+const cors = require('cors')
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 //import {username, password} from './passwords.js';
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
@@ -19,7 +22,7 @@ app.get("/search/Title/:title", async (req, res) => {
 
     const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`);
     const book = await rawData.json();
-    
+    console.log(book);
     let total = book.totalItems;
     let maxBooks = Math.min(10, total);
     if(total > 0){
@@ -39,6 +42,7 @@ app.get("/search/Title/:title", async (req, res) => {
         } 
     }
     let temp = results;
+    console.log("debug: ", temp);
     results = [];
     res.send(temp);
 })

@@ -11,7 +11,7 @@ function Favorites() {
 
   useEffect(() => {
     async function fetchData(){
-      const response = await fetch('/get-data');
+      const response = await fetch('http://localhost:5000/get-data');
       const data = await response.json();
       setMongoDB(data);
     }

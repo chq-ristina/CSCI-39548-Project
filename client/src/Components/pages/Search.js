@@ -17,8 +17,10 @@ function Search() {
   const [backendData, setBackendData] = useState([{}])
   useEffect(() => {
     async function fetchData (){
-      const response = await fetch(`/search/${searchType.searchType}/${searchWord.searchWord}`);
+      console.log("calling fetch data..");
+      const response = await fetch(`http://localhost:5000/search/${searchType.searchType}/${searchWord.searchWord}`);
       const data = await response.json();
+      console.log("debug:", data);
       setBackendData(data);
     }
     fetchData();

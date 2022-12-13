@@ -5,10 +5,6 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchWord } from '../Features/SearchWord';
 
-/*
-Might help with what I want to do with searching
-https://stackoverflow.com/questions/72923507/navigate-to-a-search-page-after-a-search-in-the-search-bar-and-reuse-the-search
-*/
 
 function SearchBar({placeholder}){
     var curSearch;
@@ -19,6 +15,7 @@ function SearchBar({placeholder}){
     }
 
     const handleClick = () =>{
+        console.log("clicked!");
         dispatch(setSearchWord({searchWord: encodeURI(curSearch)}));
     }
 
