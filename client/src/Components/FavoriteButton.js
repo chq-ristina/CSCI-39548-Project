@@ -1,79 +1,34 @@
 import React, {useEffect, useState} from 'react'
+import axios from 'axios'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useSelector, useDispatch } from 'react-redux';
 import { addFavoriteInsert, addFavoriteRemove, removeFavoriteInsert, removeFavoriteRemove } from '../Features/Favoriting';
 
 function FavoriteButton(props) {
-    const [favorited, setFavorited] = useState(false);
-    const toInsert = useSelector((state) => (state.favoriting.value.toInsert));
-    const toRemove = useSelector((state) => (state.favoriting.value.toRemove));
+    const [favorited, setFavorited] = useState((props.props.favorite) ? true : false);
 
-    /*useEffect(() => {
-        toInsert.forEach((book) => {
-            book.favorite = true;
-            async function fetchData(){
-                const response = await fetch('/insert', {
-                    method: 'POST',
-                    body: JSON.stringify(book)
-                });
-            }
-            fetchData();
-            removeFavoriteInsert(book);
-        })
-    },[])*/
-
-    //need id of object before deleting
-    /*useEffect(() => {
-        toRemove.forEach((book) => {
-            book.favorite = false;
-            async function fetchData(){
-                const response = await fetch('/delete', {
-                    method: 'POST',
-                    body: JSON.stringify(book)
-                });
-            }
-            fetchData();
-            removeFavoriteRemove(book);
-        })
-    },[])*/
-
-    /*async function updateFavorites(book) {
-        var data = new FormData();
-        data.append("json", JSON.stringify(book));
-        if(!favorited){
-            addFavoriteInsert(book);
-            console.log("Updated toInsert");
-            await fetch('/insert', {
-                method: "POST",
-                body: data
-            });
-        }
-        else{
-            addFavoriteRemove(book);
-            console.log("Updated toRemove");
-        }
-        /*if(book.favorite){
-            addFavoriteInsert(book);
-            setFavorited(true);
-        }else{
-            addFavoriteRemove(book);
-            setFavorited(false);
-        }*/
-      //}
-
+    /*
+    Want to deal with deleting books from db.
+    Before...planned to search for the book in the db, if exists, get the id of the entry
+    using the id, can delete the entry
+    */
+    const handleClick = () => {
+    }
   return (<button onClick={(e) => {
         e.preventDefault();
         setFavorited(!favorited);
-        /*if(props.hasOwnProperty('favorite')){
-          props.favorite = !props.favorite;
-          Object.preventExtensions(props);
+        console.log(props.props.img);
+        const faveBook = {
+            title: props.props.title,
+            author: props.props.author,
+            img: props.props.img,
+            description: props.props.description,
+            favorite: !favorited
         }
-        else{
-          props.favorite = true;
-          Object.preventExtensions(props);
-        }*/
-        //updateFavorites(props.props);
+
+        axios.post('http://localhost:5000/insert', faveBook).then(response => console.log(response.data))
+        
         !favorited ? window.alert(`${props.props.title} added to favorites!`) : window.alert(`${props.props.title} removed from favorites!`);
       }}>
     {(favorited)? <FavoriteIcon/> : <FavoriteBorderIcon/>}

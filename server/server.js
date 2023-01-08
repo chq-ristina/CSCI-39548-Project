@@ -1,16 +1,28 @@
 const express = require('express')
 const cors = require('cors')
-const app = express();
+const app = express()
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+
+const bookTemplateCopy = require('./BookModels')
+
 app.use(express.json());
-
 app.use(cors());
-//import {username, password} from './passwords.js';
 
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+dotenv.config()
 
-const uri = `mongodb+srv://{username}:{password}@cluster0.ovsefug.mongodb.net/?retryWrites=true&w=majority`;
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.DATABASE_ACCESS;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-//await client.connect();
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+//mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("Database connected"))
+
 
 var results = []; //will hold a list of all the data for each book
 
@@ -112,25 +124,24 @@ app.get("/search/Genre/:genre", async (req, res) => {
 })
 
 app.post('/insert', async (req, res) => {
-    const {book} = req.params;
-    console.log(book);
-    /*await client.connect();
+    await client.connect();
     try{
         const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
 
-        const doc = {
+        const favoritedBook = new bookTemplateCopy({
             title: req.body.title,
-            authors: req.body.authors,
+            author: req.body.author,
+            img: req.body.img,
             description: req.body.description,
-            img: req.body.img
-        }
-        const result = await favorites.insertOne(doc);
+            favorite: req.body.favorite 
+        })
+        const result = await favorites.insertOne(favoritedBook);
 
         console.log(`A document was inserted with the _id: ${result.insertedId}`);
     } finally{
         await client.close();
-    }*/
+    }
 })
 
 app.get('/get-data', async(req, res) => {

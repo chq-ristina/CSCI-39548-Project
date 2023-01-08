@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './Favorites.css';
 import {isEmpty} from "lodash";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteButton from '../FavoriteButton';
 
 function Favorites() {
   //const favoriteList = useSelector((state) => state.favorited.value);
@@ -13,18 +14,12 @@ function Favorites() {
     async function fetchData(){
       const response = await fetch('http://localhost:5000/get-data');
       const data = await response.json();
-      setMongoDB(data);
+      const filteredData = data.filter(bookData => bookData.favorite);
+      setMongoDB(filteredData);
     }
     fetchData();
   }, []);
-  /*favoriteList.forEach((fave) => {
-    useEffect(async () => {
-      const response = await fetch('/insert', {
-        method: 'POST',
-        body: JSON.stringify(fave)
-      });
-    }, []);
-  })*/
+
   return (
     <span className="font-link">
       {isEmpty(mongoDB) ? (
@@ -57,14 +52,17 @@ function Favorites() {
                 <div key={key}>
                   <div className='search-imgDescription'>
                     <img src={image} width="128" height="192"/>
-                    <button onClick={(e) => {
+                    <FavoriteButton
+                    props={fave}
+                    />
+                    {/*<button onClick={(e) => {
                       e.preventDefault();
                       fave.favorite = !fave.favorite;
 
                       fave.favorite ? window.alert(`${title} added to favorites!`) : window.alert(`${title} removed from favorites!`);
                     }}>
                       <FavoriteIcon/>
-                    </button>
+                  </button>*/}
                     <p className='search-description'>{description}</p>
                   </div>
                   <div className='search-words'>
