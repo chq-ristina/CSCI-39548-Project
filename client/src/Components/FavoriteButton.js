@@ -8,27 +8,48 @@ import { addFavoriteInsert, addFavoriteRemove, removeFavoriteInsert, removeFavor
 function FavoriteButton(props) {
     const [favorited, setFavorited] = useState((props.props.favorite) ? true : false);
 
-    /*
-    Want to deal with deleting books from db.
-    Before...planned to search for the book in the db, if exists, get the id of the entry
-    using the id, can delete the entry
-    */
-    const handleClick = () => {
+    const handleClick = async () => {
+      const faveBook = {
+        title: props.props.title,
+        author: props.props.author,
+        img: props.props.img,
+        description: props.props.description,
+        favorite: !favorited
+      }
+      if(!favorited){
+        axios.post('http://localhost:5000/insert', faveBook).then(response => console.log("Favorited: ", response.data))
+      }
+      else{
+        const response = await axios.get('http://localhost:5000/get-data');
+        const data = await response.data;
+        console.log("Get data: ", data);
+
+        //check if faveBook is in the database
+        var insertId;
+        console.log("FaveBook: ", faveBook);
+        data.forEach((book) => {
+          console.log(book.author.toString() === faveBook.author.toString());
+          if(book.title === faveBook.title && book.author.toString() === faveBook.author.toString() && book.img === faveBook.img && 
+            book.description === faveBook.description){
+              console.log("Found book in database!");
+              insertId = book._id;
+              console.log("_id: ", insertId);
+            }
+              
+        })
+        if(insertId){
+          console.log('deleting...');
+          axios.post('http://localhost:5000/delete', {
+            id: insertId
+          });
+        }
+      }
+        
     }
   return (<button onClick={(e) => {
         e.preventDefault();
         setFavorited(!favorited);
-        console.log(props.props.img);
-        const faveBook = {
-            title: props.props.title,
-            author: props.props.author,
-            img: props.props.img,
-            description: props.props.description,
-            favorite: !favorited
-        }
-
-        axios.post('http://localhost:5000/insert', faveBook).then(response => console.log(response.data))
-        
+        handleClick();
         !favorited ? window.alert(`${props.props.title} added to favorites!`) : window.alert(`${props.props.title} removed from favorites!`);
       }}>
     {(favorited)? <FavoriteIcon/> : <FavoriteBorderIcon/>}

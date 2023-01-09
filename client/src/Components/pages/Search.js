@@ -3,9 +3,6 @@ import '../../App.css';
 import { useSelector, useDispatch } from 'react-redux';
 import './Search.css';
 import {isEmpty} from "lodash";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import { addFavorite, addFavoriteInsert, addFavoriteRemove, removeFavorite } from '../../Features/Favoriting';
 import FavoriteButton from '../FavoriteButton';
 
 function Search() {
@@ -50,8 +47,6 @@ function Search() {
               })
           
               authorString = authorString.slice(0, authorString.length - 2);
-          
-              //console.log(key, description.length);
 
               if(description.length > 600){
                 description = description.slice(0, 600);
@@ -62,20 +57,6 @@ function Search() {
                 <div key={key}>
                 <div className='search-imgDescription'>
                   <img src = {image} width="128" height="192"/>
-                  {/*<button onClick={(e) => {
-                    e.preventDefault();
-                    console.log(key, title, authorString);
-                    if(book.hasOwnProperty('favorite')){
-                      book.favorite = !book.favorite;
-                    }
-                    else{
-                      book.favorite = true
-                    }
-                    updateFavorites(book);
-                    book.favorite ? window.alert(`${title} added to favorites!`) : window.alert(`${title} removed from favorites!`);
-                  }}>
-                    {(book.hasOwnProperty('favorite') && book.favorite)? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-                </button>*/}
                   <FavoriteButton
                   props={book}/>
                   <p className="search-description">{description}</p>

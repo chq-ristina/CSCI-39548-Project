@@ -6,8 +6,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteButton from '../FavoriteButton';
 
 function Favorites() {
-  //const favoriteList = useSelector((state) => state.favorited.value);
-
   const [mongoDB, setMongoDB] = useState([{}]);
 
   useEffect(() => {
@@ -55,14 +53,6 @@ function Favorites() {
                     <FavoriteButton
                     props={fave}
                     />
-                    {/*<button onClick={(e) => {
-                      e.preventDefault();
-                      fave.favorite = !fave.favorite;
-
-                      fave.favorite ? window.alert(`${title} added to favorites!`) : window.alert(`${title} removed from favorites!`);
-                    }}>
-                      <FavoriteIcon/>
-                  </button>*/}
                     <p className='search-description'>{description}</p>
                   </div>
                   <div className='search-words'>

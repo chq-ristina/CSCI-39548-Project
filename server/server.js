@@ -21,9 +21,6 @@ client.connect(err => {
   client.close();
 });
 
-//mongoose.connect(process.env.DATABASE_ACCESS, () => console.log("Database connected"))
-
-
 var results = []; //will hold a list of all the data for each book
 
 app.get("/search/Title/:title", async (req, res) => {
@@ -34,7 +31,7 @@ app.get("/search/Title/:title", async (req, res) => {
 
     const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}`);
     const book = await rawData.json();
-    console.log(book);
+    //console.log(book);
     let total = book.totalItems;
     let maxBooks = Math.min(10, total);
     if(total > 0){
@@ -54,7 +51,7 @@ app.get("/search/Title/:title", async (req, res) => {
         } 
     }
     let temp = results;
-    console.log("debug: ", temp);
+    //console.log("debug: ", temp);
     results = [];
     res.send(temp);
 })
@@ -167,14 +164,14 @@ app.get('/get-data', async(req, res) => {
 })
 
 app.post('/delete', async(req, res) =>{
-    var id = req.id;
+    var id = req.body.id;
+    console.log("id", id);
     await client.connect();
 
     try{
         const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
-
-        const query = {"_id": ObjectId(id)};
+        const query = {"_id": new mongoose.mongo.ObjectId(id)};
 
         const result = await favorites.deleteOne(query);
 
