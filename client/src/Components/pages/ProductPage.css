@@ -1,0 +1,58 @@
+.productPage {
+    display: flex;
+    /* border: 2px solid black; */
+    /*position:relative;
+    padding:0; */
+    margin:20px;
+
+    top:0;
+    left:0;
+
+    width: 100vw;
+    height: 100vh;
+    max-width:99%;
+    max-height: 100%;
+
+    color:rgb(52, 52, 52);
+
+    /* overflow:auto; */
+
+}
+
+.child {
+    flex: -1;
+    /* border: 2px solid red; */
+    margin: 20px;
+}  
+
+.child:first-child {
+    margin-right: 20px;
+    text-align: center;
+} 
+
+.cover img{
+    height: 70%;
+    /*width: 45%;*/
+}
+
+.cover button{
+    background-color: #e5e6cc;
+    border: none;
+    margin-top: 20px;
+    height: 25px;
+    color:rgb(207, 57, 57);
+    cursor: pointer;
+}
+
+.title{
+    color:rgb(9, 86, 55);
+    font-size: 5vh;
+}
+
+.title, .author, .description{
+    margin: 15px;
+}
+
+.description{
+    font-size: 90%;
+}
