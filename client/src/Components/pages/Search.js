@@ -13,7 +13,6 @@ function Search() {
   const toRemove = useSelector((state) => (state.favoriting.value.toRemove));
 
   const [paginate, setpaginate] = useState(10);
-  const [loadMore, setLoadMore] = useState(false);
 
   const [backendData, setBackendData] = useState([{}])
   useEffect(() => {
@@ -30,9 +29,6 @@ function Search() {
 
   const load_more = (event) => {
     setpaginate((prevValue) => prevValue + 10);
-    if(paginate >= 40){
-      setLoadMore(false);
-    }
   };
 
   return (
