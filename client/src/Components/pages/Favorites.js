@@ -4,6 +4,7 @@ import './Favorites.css';
 import {isEmpty} from "lodash";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteButton from '../FavoriteButton';
+import { Link } from 'react-router-dom';
 
 function Favorites() {
   const [mongoDB, setMongoDB] = useState([{}]);
@@ -49,7 +50,10 @@ function Favorites() {
               return(
                 <div key={key}>
                   <div className='search-imgDescription'>
-                    <img src={image} width="128" height="192"/>
+                    <Link to='/product' state={{props: fave}}>
+                      <img src={image} width="128" height="192"/>
+                    </Link>
+                    
                     <FavoriteButton
                     props={fave}
                     />

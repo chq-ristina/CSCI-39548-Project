@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './Search.css';
 import {isEmpty} from "lodash";
 import FavoriteButton from '../FavoriteButton';
+import { Link } from 'react-router-dom';
 
 function Search() {
   const searchWord = useSelector((state) => state.searchWord.value);
@@ -56,7 +57,10 @@ function Search() {
               return(
                 <div key={key}>
                 <div className='search-imgDescription'>
-                  <img src = {image} width="128" height="192"/>
+                  <Link to='/product' state={{props: book}}>
+                    <img src = {image} width="128" height="192"/>
+                  </Link>
+                  
                   <FavoriteButton
                   props={book}/>
                   <p className="search-description">{description}</p>
