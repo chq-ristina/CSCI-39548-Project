@@ -53,3 +53,22 @@
     margin:0px;
     line-height: 1;
 }
+.load-more{
+    text-align: center;
+}
+
+#root > div > span > div > div.load-more > button{
+    border-radius: 20px;
+    background-color: rgb(55, 167, 142);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding:15px;
+    min-height:30px; 
+    min-width: 120px;
+    font-size: 3vh;
+}
+
+#root > div > span > div > div.load-more > button:hover{
+    background-color: rgb(42, 125, 107);
+}
