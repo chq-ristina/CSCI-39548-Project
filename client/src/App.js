@@ -6,6 +6,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Favorite from './Components/pages/Favorites';
 import Search from './Components/pages/Search';
 import ProductPage from './Components/pages/ProductPage';
+import Register from './Components/pages/Register';
+import Login from './Components/pages/Login';
 
 /*
 Was thinking of doing a drop down bar next to search bar so user can select between searching for a
@@ -31,6 +33,8 @@ function App() {
           <Route path='/favorites' element={<Favorite/>}></Route>
           <Route path='/search' element={<Search/>}></Route>
           <Route path='/product' element={<ProductPage/>}></Route>
+          <Route path='/register' element={<Register/>}></Route>
+          <Route path='/login' element={<Login/>}></Route>
         </Routes>
       </Router>
     </div>
