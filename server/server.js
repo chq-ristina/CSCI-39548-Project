@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
 const bookTemplateCopy = require('./BookModels')
+const userTemplateCopy = require('./UserModels')
 
 app.use(express.json());
 app.use(cors());
@@ -13,6 +14,7 @@ dotenv.config()
 
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const { collection } = require('./UserModels')
 const uri = process.env.DATABASE_ACCESS;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
@@ -186,6 +188,68 @@ app.post('/delete', async (req, res) => {
             console.log("No documents deleted");
         }
     } finally {
+        await client.close();
+    }
+})
+
+app.get("/login", cors(),(req, res) =>{
+
+})
+
+app.post("/login", async(req, res)=>{
+    await client.connect();
+    try{
+        const database = client.db("CSCI-39548-Project");
+        const users = database.collection("Users");
+
+        const{email, password} = req.body;
+
+        const checkEmail = await users.findOne({email:email});
+        
+        if (checkEmail){
+            const checkPassword = await users.findOne({password:password});
+            
+            if(checkPassword){
+                res.json("exists");
+                console.log("User exists");
+            }
+            else{
+                res.json("wrong password");
+                console.log("User does not exist: password");
+            }
+        }else{
+            res.json("wrong email");
+            console.log("User does not exist: email")
+        }
+    }finally{
+        await client.close();
+    }
+})
+
+app.post("/register", async(req, res)=>{
+    await client.connect();
+    try{
+        const database = client.db("CSCI-39548-Project");
+        const users = database.collection("Users");
+
+        const user = new userTemplateCopy({
+            email: req.body.email,
+            password: req.body.password,
+            fname: req.body.fname,
+            lname: req.body.lname
+        })
+
+        const check = await users.findOne({email: req.body.email});
+
+        if(check){
+            res.json("exists")
+        }else{
+            res.json("doesn't exist");
+            const result = await users.insertOne(user);
+            console.log(`A document was inserted with the _id: ${result.insertedId}`)
+        }
+        
+    }finally{
         await client.close();
     }
 })
