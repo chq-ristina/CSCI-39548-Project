@@ -34,21 +34,37 @@ function ProductPage() {
   console.log(book);
 
   return (
-    <div className='productPage'>
-      <div className='child cover'>
-        <img src={book.img} />
-        <div>
-          <FavoriteButton props={book} />
-          <div>Add to your favorites</div>
-          {/* <div>PRICE</div> */}
-        </div>
+    // <div className='productPage'>
+    //   <div className='child cover'>
+    //     <img src={book.img} />
+    //     <div>
+    //       <FavoriteButton props={book} />
+    //       <div>Add to your favorites</div>
+    //       {/* <div>PRICE</div> */}
+    //     </div>
 
+    //   </div>
+    //   <div className='child info'>
+    //     <div className='title'> {book.title} </div>
+    //     <div className='author'>by <strong>{book.author}</strong></div>
+    //     <div className='description'>{book.description}</div>
+    //   </div>
+    // </div>
+    <div className='parent'>
+      <div className='left'>
+        <img src={book.img}/>
+        <div>
+          <FavoriteButton props={book}/>
+          <div>Add to your favorites</div>
+          <div>PRICE</div>
+        </div>
       </div>
-      <div className='child'>
+      <div className='right'>
         <div className='title'> {book.title} </div>
         <div className='author'>by <strong>{book.author}</strong></div>
         <div className='description'>{book.description}</div>
       </div>
+
     </div>
 
   )
