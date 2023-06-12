@@ -61,7 +61,7 @@ function Register() {
                 <input required type='email' onChange={(e) => setEmail(e.target.value)} placeholder='email'></input>
                 <input required type='password' onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
                 <button onClick={submit}>Sign Up</button>
-                {err && <span>Something went wrong</span>}
+                {err && <span className='error'>Something went wrong</span>}
             </form>
             <p>Have an account? <Link to='/login'>Login</Link></p>
         </div>

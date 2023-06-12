@@ -58,7 +58,7 @@ function Login() {
                     <input required type='email' onChange={(e) => setEmail(e.target.value)} placeholder='email'></input>
                     <input required type='password' onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
                     <button onClick={submit}>Login</button>
-                    {err && <span>Something went wrong</span>}
+                    {err && <span className='error'>Something went wrong</span>}
                 </form>
                 <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
             </div>
