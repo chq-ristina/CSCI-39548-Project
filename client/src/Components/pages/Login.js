@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import './Form.css';
-import { createSerializableStateInvariantMiddleware } from '@reduxjs/toolkit';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import { setUser } from '../../Features/User';
 
 function Login() {
 
     const history= useNavigate();
+
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const[password, setPassword] = useState('');
@@ -16,7 +19,7 @@ function Login() {
     async function submit(e){
         e.preventDefault();
 
-        if(email == '' || password == ''){
+        if(email === '' || password === ''){
             alert("You must fill in all fields");
             console.log("not logging in!");
             return;
@@ -31,11 +34,12 @@ function Login() {
         try{
             await axios.post("http://localhost:5000/login", user)
             .then(res => {
-                if(res.data =="exists"){
+                if(res.data.msg === "exists"){
+                    dispatch(setUser({user_id: res.data.user_id, fname: res.data.fname}))
                     history("/")
-                }else if(res.data == "wrong email"){
+                }else if(res.data.msg === "wrong email"){
                     alert("Wrong email");
-                }else if(res.data == "wrong password"){
+                }else if(res.data.msg === "wrong password"){
                     alert("Wrong password");
                 }
             })
@@ -49,6 +53,10 @@ function Login() {
             console.log(e);
         }
     }
+
+    // console.log(useSelector((state) => state.fname.value));
+    // const user_fname = useSelector((state) => state.user.value.fname)
+    // console.log(user_fname);
 
     return (
         <div className='form-container'>

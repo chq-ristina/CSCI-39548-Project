@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 import './Form.css';
 import axios from 'axios';
+import { setUser } from '../../Features/User';
 
 function Register() {
 
     const history = useNavigate();
+    const dispatch = useDispatch();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,7 +20,7 @@ function Register() {
     async function submit(e){
         e.preventDefault();
 
-        if(email == '' || password == '' || fname == '' || lname == ''){
+        if(email === '' || password === '' || fname === '' || lname === ''){
             alert("You must fill in all fields");
             console.log("not signing up!");
             return;
@@ -34,9 +37,10 @@ function Register() {
         try{
             await axios.post("http://localhost:5000/register",user)
             .then(res => {
-                if(res.data =="exists"){
+                if(res.data.msg === "exists"){
                     alert("Account already exists")
-                }else if(res.data =="doesn't exist"){
+                }else if(res.data.msg === "doesn't exist"){
+                    dispatch(setUser({user_id: res.data.user_id, fname: res.data.fname}));
                     history("/")
                 }
             })

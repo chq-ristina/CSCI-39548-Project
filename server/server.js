@@ -246,15 +246,15 @@ app.post("/login", async (req, res) => {
             const result = await bcrypt.compare(password, user.password);
 
             if (result) {
-                res.json("exists");
+                res.json({msg: "exists", user_id: user._id, fname: user.fname});
                 console.log("User exists");
             }
             else {
-                res.json("wrong password");
+                res.json({msg: "wrong password"});
                 console.log("User does not exist: password");
             }
         } else {
-            res.json("wrong email");
+            res.json({msg: "wrong email"});
             console.log("User does not exist: email")
         }
 
@@ -279,15 +279,15 @@ app.post("/register", async (req, res) => {
         const check = await users.findOne({ email: req.body.email });
 
         if (check) {
-            res.json("exists")
+            res.json({msg: "exists"})
         } else {
             //Hash password
             const hash = await bcrypt.hash(user.password, 12);
             user.password = hash;
            
-            res.json("doesn't exist");
             const result = await users.insertOne(user);
             console.log(`A document was inserted with the _id: ${result.insertedId}`)
+            res.json({msg: "doesn't exist", user_id: result.insertedId, fname: user.fname});
         }
 
     } finally {

@@ -7,6 +7,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeUser } from '../Features/User';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
@@ -15,12 +17,21 @@ function Navbar() {
   }
 
   const location = useLocation();
+  const dispatch = useDispatch();
+
+  const user_fname = useSelector((state) => state.user.value.fname);
+  const user_id = useSelector((state) => state.user.value.user_id);
+  const logged_in = useSelector((state) => state.user.value.logged_in);
 
   useEffect(() => {
     // execute on location change
     setOpen(false);
     console.log('Location changed!', location.pathname);
   }, [location]);
+
+  const handleLogOut = () => {
+    dispatch(removeUser());
+  }
 
   return (
     <>
@@ -45,12 +56,32 @@ function Navbar() {
               <div className='navbar-menu-container'>
                 {open &&
                   <ul className='menu'>
-                    <li className='menu-item'>
-                      <Link style={{ textDecoration: 'none' }} to='/login'>Sign in</Link>
-                    </li>
-                    <li className='menu-item'>
-                      <Link style={{ textDecoration: 'none' }} to='/register'>Create an account</Link>
-                    </li>
+                    {
+                      logged_in && 
+                      <li className='menu-item'>
+                        Hi <strong>{user_fname}</strong>
+                      </li>
+                    }
+                    {
+                      logged_in && 
+                      <li onClick={handleLogOut} className='menu-item' style={{cursor: 'pointer'}}>
+                        <strong>Logout</strong>
+                      </li>
+                    }
+                    {
+                      !logged_in && 
+                      <li className='menu-item'>
+                        <Link style={{ textDecoration: 'none' }} to='/login'>Sign in</Link>
+                      </li>
+                    }
+                    {
+                      !logged_in && 
+                      <li className='menu-item'>
+                        <Link style={{ textDecoration: 'none' }} to='/register'>Create an account</Link>
+                      </li>
+                    }
+                    
+                    
                     <li className='menu-item'>
                       Order history
                     </li>

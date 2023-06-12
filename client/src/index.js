@@ -8,11 +8,14 @@ import {Provider} from 'react-redux';
 import searchTypeReducer from './Features/SearchType';
 import SearchWordReducer from './Features/SearchWord';
 import favoritingReducer from './Features/Favoriting';
+import userReducer from './Features/User';
+
 const store = configureStore({
   reducer: {
     searchType: searchTypeReducer,
     searchWord: SearchWordReducer,
-    favoriting: favoritingReducer
+    favoriting: favoritingReducer,
+    user: userReducer
   }
 })
 
