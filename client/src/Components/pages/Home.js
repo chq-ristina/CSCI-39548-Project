@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, Location, useLocation } from 'react-router-dom';
 import '../../App.css';
 import Dropdown from '../Dropdown';
 import SearchBar from '../SearchBar';
@@ -10,6 +10,10 @@ import { useSelector } from 'react-redux';
 
 function Home() {
  const searchType = useSelector((state) => state.searchType.value);
+ const user_fname = useSelector((state) => state.user.value.fname);
+ const user_id = useSelector((state) => state.user.value.user_id);
+ const logged_in = useSelector((state) => state.user.value.logged_in);
+  console.log("User fname:", user_fname, "User id:", user_id, "Logged in:", logged_in);
 
   const getPlaceholder = () => {
     switch(searchType.searchType){

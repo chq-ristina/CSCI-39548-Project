@@ -21,6 +21,7 @@ function Favorites() {
 
   return (
     <span className="font-link">
+      {typeof mongoDB[0].title != 'undefined' && <h1 style={{color: 'black', margin: '30px'}}>Your Favorites</h1>}
       {isEmpty(mongoDB) ? (
         <p>No favorites yet</p>
       ): (
