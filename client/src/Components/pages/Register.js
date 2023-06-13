@@ -16,12 +16,17 @@ function Register() {
     const [lname, setLName] = useState('');
 
     const [err, setErr] = useState(false);
+    const [empty, setEmpty] = useState(false);
+    const [exists, setExists] = useState(false);
 
     async function submit(e){
         e.preventDefault();
 
         if(email === '' || password === '' || fname === '' || lname === ''){
-            alert("You must fill in all fields");
+            // alert("You must fill in all fields");
+            setEmpty(true);
+            if(exists) setExists(false);
+            if(err) setErr(false);
             console.log("not signing up!");
             return;
         }
@@ -38,7 +43,10 @@ function Register() {
             await axios.post("http://localhost:5000/register",user)
             .then(res => {
                 if(res.data.msg === "exists"){
-                    alert("Account already exists")
+                    // alert("Account already exists")
+                    setExists(true);
+                    if(err) setErr(false);
+                    if(empty) setEmpty(false);
                 }else if(res.data.msg === "doesn't exist"){
                     dispatch(setUser({user_id: res.data.user_id, fname: res.data.fname}));
                     history("/")
@@ -66,6 +74,8 @@ function Register() {
                 <input required type='password' onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
                 <button onClick={submit}>Sign Up</button>
                 {err && <span className='error'>Something went wrong</span>}
+                {empty && <span className='error'>You must fill in all fields</span>}
+                {exists && <span className='error'>Account already exist</span>}
             </form>
             <p>Have an account? <Link to='/login'>Login</Link></p>
         </div>

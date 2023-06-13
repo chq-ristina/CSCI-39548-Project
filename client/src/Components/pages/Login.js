@@ -15,12 +15,21 @@ function Login() {
     const[password, setPassword] = useState('');
 
     const [err, setErr] = useState(false);
+    const [empty, setEmpty] = useState(false);
+    // const [errEmail, setErrEmail] = useState(false);
+    // const [errPass, setErrPass] = useState(false);
+    const [errEmailPass, setErrEmailPass] = useState(false);
 
     async function submit(e){
         e.preventDefault();
 
         if(email === '' || password === ''){
-            alert("You must fill in all fields");
+            //alert("You must fill in all fields");
+            setEmpty(true);
+            if(err)setErr(false);
+            // setErrEmail(false);
+            // setErrPass(false);
+            if(errEmailPass)setErrEmailPass(false);
             console.log("not logging in!");
             return;
         }
@@ -37,10 +46,22 @@ function Login() {
                 if(res.data.msg === "exists"){
                     dispatch(setUser({user_id: res.data.user_id, fname: res.data.fname}))
                     history("/")
-                }else if(res.data.msg === "wrong email"){
-                    alert("Wrong email");
-                }else if(res.data.msg === "wrong password"){
-                    alert("Wrong password");
+                }else{
+                    setErrEmailPass(true);
+                    if(err)setErr(false);
+                    if(empty)setEmpty(false);
+                //     else if(res.data.msg === "wrong email"){
+                //     // alert("Wrong email");
+                //     setErrEmail(true);
+                //     setErr(false);
+                //     setErrPass(false);
+                //     setEmpty(false);
+                // }else if(res.data.msg === "wrong password"){
+                //     // alert("Wrong password");
+                //     setErrPass(true);
+                //     if(empty){setEmpty(false)};
+                //     if(err)setErr(false);
+                //     if(email)setErrEmail(false);
                 }
             })
             .catch(e =>{
@@ -67,6 +88,8 @@ function Login() {
                     <input required type='password' onChange={(e) => setPassword(e.target.value)} placeholder='password'></input>
                     <button onClick={submit}>Login</button>
                     {err && <span className='error'>Something went wrong</span>}
+                    {empty && <span className='error'>You must fill in all fields</span>}
+                    {errEmailPass && <span className='error'>Wrong email or password</span>}
                 </form>
                 <p>Don't have an account? <Link to="/register">Sign Up</Link></p>
             </div>
