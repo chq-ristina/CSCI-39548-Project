@@ -193,6 +193,7 @@ app.post('/favorites/insert', async (req, res) => {
 })
 
 app.get('/favorites/get-data', async (req, res) => {
+    console.log("getting favorites...");
     await client.connect();
     var resultArr = [];
     
@@ -215,6 +216,44 @@ app.get('/favorites/get-data', async (req, res) => {
     } finally {
         await client.close();
         res.send(resultArr);
+    }
+})
+
+app.get('/favorites/check', async(req, res) =>{
+    await client.connect();
+
+    const {title, author, img, description, user_id } = req.query;
+
+    // console.log("title:", title);
+    // console.log("author:", author);
+    // console.log("img:", img);
+    // console.log("description:", description);
+    // console.log("user_id:", user_id);
+
+    const query = {
+        title: title,
+        author: author,
+        img: img,
+        description: description,
+        user_id: user_id
+    }
+
+    try{
+        const database = client.db("CSCI-39548-Project");
+        const favorites = database.collection("Favorites");
+        const book = await favorites.findOne(query);
+
+        // console.log("book:",book);
+        if(book){
+            res.json({found: true, insertID: book._id});
+        }else{
+            res.json({found: false});
+        }
+    } /*finally{
+        await client.close();
+    }*/
+    catch (e){
+        console.log(e);
     }
 })
 

@@ -11,12 +11,36 @@ function FavoriteButton(props) {
   const user_id = useSelector((state) => state.user.value.user_id);
   const logged_in = useSelector((state) => state.user.value.logged_in);
 
+  const title = props.props.title;
+  const author = props.props.author;
+  const img = props.props.img;
+  const description = props.props.description
+
+  const req = {
+    params: {
+      title: title,
+      author: author,
+      img: img,
+      description: description,
+      user_id: user_id
+    }
+  }
+
+  //check if it is already a favorite book
+  axios.get('http://localhost:5000/favorites/check',req)
+    .then(res => {
+      console.log("fave check res:", res.data);
+      setFavorited(res.data.found);
+      console.log("favorited:", favorited);
+    });
+  
+
   const handleClick = async () => {
     const faveBook = {
-      title: props.props.title,
-      author: props.props.author,
-      img: props.props.img,
-      description: props.props.description,
+      title: title,
+      author: author,
+      img: img,
+      description: description,
       user_id: user_id,
       favorite: !favorited
     }
@@ -24,29 +48,15 @@ function FavoriteButton(props) {
       axios.post('http://localhost:5000/favorites/insert', faveBook).then(response => console.log("Favorited: ", response.data))
     }
     else {
-      const response = await axios.get('http://localhost:5000/favorites/get-data');
-      const data = await response.data;
-      console.log("Get data: ", data);
-
-      //check if faveBook is in the database
-      var insertId;
-      console.log("FaveBook: ", faveBook);
-      data.forEach((book) => {
-        console.log(book.author.toString() === faveBook.author.toString());
-        if (book.title === faveBook.title && book.author.toString() === faveBook.author.toString() && book.img === faveBook.img &&
-          book.description === faveBook.description) {
-          console.log("Found book in database!");
-          insertId = book._id;
-          console.log("_id: ", insertId);
-        }
-
-      })
-      if (insertId) {
+      const response = await axios.get('http://localhost:5000/favorites/check',req);
+      if(response.data.found){
         console.log('deleting...');
-        axios.post('http://localhost:5000/favorites/delete', {
-          id: insertId
+        axios.post('http://localhost:5000/favorites/delete', 
+        {
+          id: response.data.insertID
         });
       }
+      
     }
 
   }
