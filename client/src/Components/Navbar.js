@@ -6,7 +6,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeUser } from '../Features/User';
 
@@ -18,6 +18,7 @@ function Navbar() {
 
   const location = useLocation();
   const dispatch = useDispatch();
+  const history = useNavigate();
 
   const user_fname = useSelector((state) => state.user.value.fname);
   const user_id = useSelector((state) => state.user.value.user_id);
@@ -31,6 +32,8 @@ function Navbar() {
 
   const handleLogOut = () => {
     dispatch(removeUser());
+    history("/");
+
   }
 
   return (

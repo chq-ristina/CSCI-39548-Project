@@ -7,11 +7,29 @@ import FavoriteButton from '../FavoriteButton';
 import { Link } from 'react-router-dom';
 
 function Favorites() {
+
+  /*
+  TODO: 
+  Show books are favorited when not on the favorites page 
+  */
   const [mongoDB, setMongoDB] = useState([{}]);
+  const [loading, setLoading] = useState(false);
+
+  const user_id = useSelector((state) => state.user.value.user_id);
+  console.log("mongoDB:", mongoDB);
+  console.log("User ID:", user_id);
+
+  const u_id  = {
+    params: {
+      user_id: user_id,
+    }
+  }
+
+  console.log(u_id);
 
   useEffect(() => {
     async function fetchData(){
-      const response = await fetch('http://localhost:5000/get-data');
+      const response = await fetch(`http://localhost:5000/favorites/get-data?user_id=${user_id}`);
       const data = await response.json();
       const filteredData = data.filter(bookData => bookData.favorite);
       setMongoDB(filteredData);
@@ -21,9 +39,9 @@ function Favorites() {
 
   return (
     <span className="font-link">
-      {typeof mongoDB[0].title != 'undefined' && <h1 style={{color: 'black', margin: '30px'}}>Your Favorites</h1>}
+      {/* {!loading && <h1 style={{color: 'black', margin: '30px'}}>Your Favorites</h1>} */}
       {isEmpty(mongoDB) ? (
-        <p>No favorites yet</p>
+        <p className='favorites-none'>No favorites yet</p>
       ): (
         <div className='favorites-Favorites'>
           {(typeof mongoDB[0].title === 'undefined') ? (

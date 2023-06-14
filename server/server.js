@@ -8,8 +8,8 @@ const dotenv = require('dotenv')
 // const router = express.Router();
 const bcrypt = require("bcryptjs");
 
-const bookTemplateCopy = require('./BookModels')
-const userTemplateCopy = require('./UserModels')
+const bookTemplateCopy = require('./models/BookModels')
+const userTemplateCopy = require('./models/UserModels')
 
 app.use(express.json());
 app.use(cors());
@@ -27,7 +27,7 @@ dotenv.config()
 // } = require("./config/config");
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const { collection } = require('./UserModels')
+const { collection } = require('./models/UserModels')
 const uri = process.env.DATABASE_ACCESS;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
@@ -61,6 +61,9 @@ client.connect(err => {
 // );
 
 var results = []; //will hold a list of all the data for each book
+
+
+//******************SEARCH******************
 
 app.get("/search/Title/:title", async (req, res) => {
     const { title } = req.params;
@@ -164,7 +167,10 @@ app.get("/search/Genre/:genre", async (req, res) => {
     results = [];
 })
 
-app.post('/insert', async (req, res) => {
+
+//******************FAVORITES******************
+
+app.post('/favorites/insert', async (req, res) => {
     await client.connect();
     try {
         const database = client.db("CSCI-39548-Project");
@@ -175,6 +181,7 @@ app.post('/insert', async (req, res) => {
             author: req.body.author,
             img: req.body.img,
             description: req.body.description,
+            user_id: req.body.user_id,
             favorite: req.body.favorite
         })
         const result = await favorites.insertOne(favoritedBook);
@@ -185,14 +192,18 @@ app.post('/insert', async (req, res) => {
     }
 })
 
-app.get('/get-data', async (req, res) => {
+app.get('/favorites/get-data', async (req, res) => {
     await client.connect();
-    var resultArr = []
+    var resultArr = [];
+    
+    console.log(req.query);
+    const {user_id} = req.query;
+    console.log("user id:", user_id);
+
     try {
         const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
-
-        const cursor = favorites.find();
+        const cursor = favorites.find({user_id:  {$all:[user_id]}} );
 
         if ((await cursor.count()) === 0) {
             console.log("No documents found");
@@ -207,7 +218,7 @@ app.get('/get-data', async (req, res) => {
     }
 })
 
-app.post('/delete', async (req, res) => {
+app.post('/favorites/delete', async (req, res) => {
     var id = req.body.id;
     console.log("id", id);
     await client.connect();
@@ -229,6 +240,8 @@ app.post('/delete', async (req, res) => {
     }
 })
 
+
+//******************USER REGISTRATION******************
 app.get("/login", cors(), (req, res) => {
 
 })
