@@ -21,6 +21,10 @@ const bookTemplate = new mongoose.Schema({
         type: Boolean,
         required: false
     },
+    user_id: {
+        type: String,
+        required: true
+    },
     date: {
         type: Date,
         default: Date.now

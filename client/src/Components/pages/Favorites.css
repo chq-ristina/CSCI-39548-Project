@@ -5,3 +5,8 @@
 .favorites-Favorites{
     padding: 30px;
 }
+
+.favorites-none{
+    color: black;
+    font-size: 15vh;
+}
