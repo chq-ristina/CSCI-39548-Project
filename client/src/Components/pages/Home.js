@@ -5,15 +5,23 @@ import Dropdown from '../Dropdown';
 import SearchBar from '../SearchBar';
 import './Home.css';
 import '../../App';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchType } from '../../Features/SearchType';
 
 
 function Home() {
+  const dispatch = useDispatch();
+
  const searchType = useSelector((state) => state.searchType.value);
  const user_fname = useSelector((state) => state.user.value.fname);
  const user_id = useSelector((state) => state.user.value.user_id);
  const logged_in = useSelector((state) => state.user.value.logged_in);
+ 
   console.log("User fname:", user_fname, "User id:", user_id, "Logged in:", logged_in);
+
+  useEffect(() => {
+    dispatch(setSearchType({searchType: "Title"}));
+  }, [])
 
   const getPlaceholder = () => {
     switch(searchType.searchType){
