@@ -9,13 +9,15 @@ import searchTypeReducer from './Features/SearchType';
 import SearchWordReducer from './Features/SearchWord';
 import favoritingReducer from './Features/Favoriting';
 import userReducer from './Features/User';
+import shoppingCartReducer from './Features/ShoppingCart';
 
 const store = configureStore({
   reducer: {
     searchType: searchTypeReducer,
     searchWord: SearchWordReducer,
     favoriting: favoritingReducer,
-    user: userReducer
+    user: userReducer,
+    shoppingCart: shoppingCartReducer
   }
 })
 
