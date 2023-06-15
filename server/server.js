@@ -181,6 +181,7 @@ app.post('/favorites/insert', async (req, res) => {
             author: req.body.author,
             img: req.body.img,
             description: req.body.description,
+            price: req.body.price,
             user_id: req.body.user_id,
             favorite: req.body.favorite
         })

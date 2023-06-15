@@ -16,7 +16,7 @@ function Favorites() {
   const [loading, setLoading] = useState(false);
 
   const user_id = useSelector((state) => state.user.value.user_id);
-  console.log("mongoDB:", mongoDB);
+  //console.log("mongoDB:", mongoDB);
   console.log("User ID:", user_id);
 
   const u_id  = {
@@ -25,7 +25,7 @@ function Favorites() {
     }
   }
 
-  console.log(u_id);
+  //console.log(u_id);
 
   useEffect(() => {
     async function fetchData(){

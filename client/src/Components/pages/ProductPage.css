@@ -1,43 +1,74 @@
-.title{
-    color:rgb(9, 86, 55);
+.title {
+    color: rgb(9, 86, 55);
     font-size: 5vh;
 }
 
-.title, .author, .description{
+.title,
+.author,
+.buy,
+.description {
     margin: 15px;
 }
 
-.description{
+.description {
     font-size: 90%;
 }
 
-.parent{
+.parent {
     margin: 20px;
     /* border: 2px solid black; */
-    overflow:hidden;
-    color:rgb(52, 52, 52);
-}
-.left{
-    /* border: 2px solid red; */
-    width: 30%;
-    float: left; 
-    text-align: center;
-}
-.right{
-    /* border: 2px solid red; */
-    width: 65%;
-    float: right; 
+    overflow: hidden;
+    color: rgb(52, 52, 52);
 }
 
-.left img{
+.left {
+    /* border: 2px solid red; */
+    width: 30%;
+    float: left;
+    text-align: center;
+}
+
+.right {
+    /* border: 2px solid red; */
+    width: 65%;
+    float: right;
+}
+
+.left img {
     height: 55vh;
 }
 
-.left button{
+.left button {
     background-color: #e5e6cc;
     border: none;
     margin-top: 20px;
     height: 25px;
-    color:rgb(207, 57, 57);
+    color: rgb(207, 57, 57);
     cursor: pointer;
 }
+
+.buy {
+    /* border: 2px solid yellow; */
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    justify-content: space-between;
+    column-count: 2;
+    width: 30%;
+}
+
+#root>div>div>div.right>div.buy>button {
+    border-radius: 20px;
+    /* background-color: rgb(55, 167, 142); */
+    background-color: rgb(9, 86, 55);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 15px;
+    width: 50%;
+    font-size: 3vh;
+}
+
+/* #root>div>div>div.right>div.buy>button:hover{
+    background-color: rgb(9, 86, 55);
+} */

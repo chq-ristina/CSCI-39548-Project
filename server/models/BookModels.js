@@ -1,3 +1,4 @@
+const { Int32, Double, Decimal128 } = require('mongodb')
 const mongoose = require('mongoose')
 
 const bookTemplate = new mongoose.Schema({
@@ -15,6 +16,10 @@ const bookTemplate = new mongoose.Schema({
     },
     description: {
         type: String,
+        required: true
+    },
+    price:{
+        type: Decimal128,
         required: true
     },
     favorite: {

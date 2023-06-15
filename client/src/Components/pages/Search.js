@@ -61,16 +61,24 @@ function Search() {
                     description = description.slice(0, 600);
                     description += "...";
                   }
-
+                  
+                  let bookWithPrice = {
+                    title: book.title,
+                    author: book.author,
+                    description: book.description,
+                    img: book.img,
+                    price: 15.99
+                  }
+                  
                   return (
                     <div key={key}>
                       <div className='search-imgDescription'>
-                        <Link to='/product' state={{ props: book }}>
+                        <Link to='/product' state={{ props: bookWithPrice }}>
                           <img src={image} width="128" height="192" />
                         </Link>
 
                         <FavoriteButton
-                          props={book} />
+                          props={bookWithPrice} />
                         <p className="search-description">{description}</p>
                       </div>
                       <div className='search-words'>
