@@ -66,7 +66,7 @@ function Checkout() {
                                     return (
                                         <div key={key} className='c-l-parent'>
                                             <div className='c-l-left'>
-                                                <Link to='/product' state={book}>
+                                                <Link to='/product' state={{props: book}}>
                                                     <img src={book.img} />
                                                 </Link>
                                             </div>

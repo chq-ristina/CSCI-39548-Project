@@ -19,14 +19,6 @@ function Favorites() {
   //console.log("mongoDB:", mongoDB);
   console.log("User ID:", user_id);
 
-  const u_id  = {
-    params: {
-      user_id: user_id,
-    }
-  }
-
-  //console.log(u_id);
-
   useEffect(() => {
     async function fetchData(){
       const response = await fetch(`http://localhost:5000/favorites/get-data?user_id=${user_id}`);
