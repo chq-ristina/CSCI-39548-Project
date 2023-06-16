@@ -58,10 +58,23 @@ function Favorites() {
                 description += "...";
               }
 
+              console.log("Fave price:", fave.price);
+              console.log(fave.price.$numberDecimal.toString());
+              let price = parseFloat(fave.price.$numberDecimal.toString());
+              console.log("Fave price 2.0:", price);
+              
+              const newFave = {
+                title: fave.title,
+                author: fave.author,
+                description: fave.description,
+                img: fave.img,
+                price: price
+              }
+
               return(
                 <div key={key}>
                   <div className='search-imgDescription'>
-                    <Link to='/product' state={{props: fave}}>
+                    <Link to='/product' state={{props: newFave}}>
                       <img src={image} width="128" height="192"/>
                     </Link>
                     
