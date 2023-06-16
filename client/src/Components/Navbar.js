@@ -60,31 +60,31 @@ function Navbar() {
                 {open &&
                   <ul className='menu'>
                     {
-                      logged_in && 
+                      logged_in &&
                       <li className='menu-item'>
                         Hi <strong>{user_fname}</strong>
                       </li>
                     }
                     {
-                      logged_in && 
-                      <li onClick={handleLogOut} className='menu-item' style={{cursor: 'pointer'}}>
+                      logged_in &&
+                      <li onClick={handleLogOut} className='menu-item' style={{ cursor: 'pointer' }}>
                         <strong>Logout</strong>
                       </li>
                     }
                     {
-                      !logged_in && 
+                      !logged_in &&
                       <li className='menu-item'>
                         <Link style={{ textDecoration: 'none' }} to='/login'>Sign in</Link>
                       </li>
                     }
                     {
-                      !logged_in && 
+                      !logged_in &&
                       <li className='menu-item'>
                         <Link style={{ textDecoration: 'none' }} to='/register'>Create an account</Link>
                       </li>
                     }
-                    
-                    
+
+
                     <li className='menu-item'>
                       Order history
                     </li>
@@ -104,7 +104,10 @@ function Navbar() {
             </div>
 
             <div className='navbar-cart'>
-              <ShoppingCartIcon style={{ color: 'darkgrey' }} />
+              <Link style={{textDecoration: 'none'}} to='/checkout'>
+                <ShoppingCartIcon style={{ color: 'darkgrey' }} />
+              </Link>
+
             </div>
 
 

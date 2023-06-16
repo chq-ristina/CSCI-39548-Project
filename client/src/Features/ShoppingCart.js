@@ -8,9 +8,11 @@ export const shoppingCartSlice = createSlice({
             state.value.shopping_cart.push(action.payload);
         },
         removeFromCart: (state, action) => {
-            let index = state.value.shopping_cart.indexOf(action.payload);
-            if(index !== -1){
-                state.value.shopping_cart.splice(index, 1);
+            //NEEDS FIXING
+            console.log(`removing ${action.payload} from cart!!!`);
+            console.log("index:",action.payload );
+            if(action.payload !== -1){
+                state.value.shopping_cart.splice(action.payload, 1);
             }
         },
         emptyCart: (state, action) => {

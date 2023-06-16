@@ -50,7 +50,7 @@ function ProductPage() {
   }
 
   return (
-    <div className='parent'>
+    <div className='parent font-link'>
       <div className='left'>
         <img src={book.img}/>
         <div>
