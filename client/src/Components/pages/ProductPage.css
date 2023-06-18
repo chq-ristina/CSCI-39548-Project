@@ -54,7 +54,7 @@
     overflow: hidden;
     justify-content: space-between;
     column-count: 2;
-    width: 30%;
+    width: 40%;
 }
 
 #root>div>div>div.right>div.buy>button {

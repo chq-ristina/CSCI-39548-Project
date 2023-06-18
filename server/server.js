@@ -370,7 +370,7 @@ app.post("/register", async (req, res) => {
 // });
 
 
-//******************CHECKOUT******************
+//******************ORDERS******************
 app.post("/checkout/complete-order", async (req, res) => {
     await client.connect();
     try{
@@ -390,6 +390,31 @@ app.post("/checkout/complete-order", async (req, res) => {
         await client.close();
     }
 
+})
+
+app.get("/order-history/get-orders", async(req, res) => {
+   console.log('getting order history....');
+    await client.connect();
+
+    var resultArr = [];
+
+    try{
+        const orders = database.collection("Orders");
+
+        const {user_id} = req.query;
+
+        const order = orders.find({user_id: {$all:[user_id]}});
+
+        let orderArr = await order.toArray();
+        if(orderArr.length == 0){
+            console.log("No documents found");
+        }
+        resultArr = orderArr;
+
+    } finally {
+        await client.close();
+        res.send(resultArr);
+    }
 })
 
 app.listen(5000, () => { console.log('Server listening on port 5000...') });

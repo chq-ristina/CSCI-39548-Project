@@ -8,10 +8,6 @@ import { Link } from 'react-router-dom';
 
 function Favorites() {
 
-  /*
-  TODO: 
-  Show books are favorited when not on the favorites page 
-  */
   const [mongoDB, setMongoDB] = useState([{}]);
   const [loading, setLoading] = useState(false);
 
@@ -58,10 +54,10 @@ function Favorites() {
                 description += "...";
               }
 
-              console.log("Fave price:", fave.price);
-              console.log(fave.price.$numberDecimal.toString());
+              // console.log("Fave price:", fave.price);
+              // console.log(fave.price.$numberDecimal.toString());
               let price = parseFloat(fave.price.$numberDecimal.toString());
-              console.log("Fave price 2.0:", price);
+              // console.log("Fave price 2.0:", price);
               
               const newFave = {
                 title: fave.title,

@@ -91,6 +91,7 @@ function Checkout() {
                                     <p>${total}</p>
                                 </div>
                                 <button onClick={handleOrder}>Complete Your Order</button>
+                                {!logged_in && <p style={{color: 'red', fontSize: '3vh'}}>You will be checking out as a guest. If you would like to sign in, do so <Link to='/login'>here</Link></p>}
                             </div>
 
                         </div>

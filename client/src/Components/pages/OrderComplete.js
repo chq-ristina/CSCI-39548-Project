@@ -7,8 +7,8 @@ function OrderComplete() {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '99%'
-}
+        // width: '99%'
+    }
 return (
     <div className='font-link' style={style}>
         <h1 style={{ textAlign: 'center' }}>Your Order Is Complete!</h1>

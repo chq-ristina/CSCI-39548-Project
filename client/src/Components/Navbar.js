@@ -86,7 +86,7 @@ function Navbar() {
 
 
                     <li className='menu-item'>
-                      Order history
+                      <Link style={{textDecoration: 'none' }} to='/order-history'>Order history</Link>
                     </li>
                   </ul>
                 }
