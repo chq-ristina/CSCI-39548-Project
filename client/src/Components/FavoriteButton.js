@@ -14,7 +14,8 @@ function FavoriteButton(props) {
   const title = props.props.title;
   const author = props.props.author;
   const img = props.props.img;
-  const description = props.props.description
+  const description = props.props.description;
+  const price = props.props.price;
 
   const req = {
     params: {
@@ -22,6 +23,7 @@ function FavoriteButton(props) {
       author: author,
       img: img,
       description: description,
+      price: price,
       user_id: user_id
     }
   }
@@ -29,7 +31,7 @@ function FavoriteButton(props) {
   //check if it is already a favorite book
   axios.get('http://localhost:5000/favorites/check',req)
     .then(res => {
-      console.log("fave check res:", res.data);
+      //console.log("fave check res:", res.data);
       setFavorited(res.data.found);
       console.log("favorited:", favorited);
     });
@@ -41,6 +43,7 @@ function FavoriteButton(props) {
       author: author,
       img: img,
       description: description,
+      price: price,
       user_id: user_id,
       favorite: !favorited
     }

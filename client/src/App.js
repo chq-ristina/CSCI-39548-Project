@@ -8,6 +8,9 @@ import Search from './Components/pages/Search';
 import ProductPage from './Components/pages/ProductPage';
 import Register from './Components/pages/Register';
 import Login from './Components/pages/Login';
+import Checkout from './Components/pages/Checkout';
+import OrderComplete from './Components/pages/OrderComplete';
+import OrderHistory from './Components/pages/OrderHistory';
 
 /*
 Was thinking of doing a drop down bar next to search bar so user can select between searching for a
@@ -35,6 +38,9 @@ function App() {
           <Route path='/product' element={<ProductPage/>}></Route>
           <Route path='/register' element={<Register/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path='/checkout' element={<Checkout/>}></Route>
+          <Route path='/order-complete' element={<OrderComplete/>}></Route>
+          <Route path='/order-history' element={<OrderHistory/>}></Route>
         </Routes>
       </Router>
     </div>

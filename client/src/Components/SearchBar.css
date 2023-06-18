@@ -26,8 +26,13 @@
     border-top-left-radius: 0px;
     border-bottom-left-radius: 0px;
     background-color: white;
-    /*color: rgb(18, 11, 46);*/
+    color: rgb(18, 11, 46);
     cursor:pointer;
+}
+
+.searchIcon :visited{
+    color: rgb(18, 11, 46);
+    text-decoration: none;
 }
 
 input:focus{

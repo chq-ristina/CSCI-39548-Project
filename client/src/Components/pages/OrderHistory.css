@@ -1,0 +1,44 @@
+.order-history{
+    color: black;
+    /* border: 2px solid yellow; */
+    width: 99%;
+    margin: 15px;
+}
+
+.order{
+    /* border: 2px solid red; */
+    /* width: 99%; */
+    margin: 15px;
+}
+
+.order-info{
+    border-bottom: 2px solid rgb(49, 94, 59); 
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    /* justify-content: space-evenly; */
+}
+
+.order-info p{
+    padding: 5px;
+}
+
+.order-book{
+    /* border: 2px solid orange; */
+    overflow: hidden;
+    margin: 15px;
+    width: 100%;
+    /* columns: 2; */
+}
+
+.order-left{
+    /* border: 2px solid blue; */
+    width: 11%;
+    float: left;
+}
+
+.order-right{
+    /* border: 2px solid pink; */
+    width: 87%;
+    float: right;
+}

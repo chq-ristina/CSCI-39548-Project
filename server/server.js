@@ -10,6 +10,7 @@ const bcrypt = require("bcryptjs");
 
 const bookTemplateCopy = require('./models/BookModels')
 const userTemplateCopy = require('./models/UserModels')
+const orderTemplateCopy = require('./models/OrderModel')
 
 app.use(express.json());
 app.use(cors());
@@ -35,6 +36,8 @@ client.connect(err => {
     // perform actions on the collection object
     client.close();
 });
+
+const database = client.db("CSCI-39548-Project");
 
 // const MAX_AGE = 1000 * 60 * 60 * 3; // Three hours
 
@@ -173,7 +176,7 @@ app.get("/search/Genre/:genre", async (req, res) => {
 app.post('/favorites/insert', async (req, res) => {
     await client.connect();
     try {
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
 
         const favoritedBook = new bookTemplateCopy({
@@ -181,6 +184,7 @@ app.post('/favorites/insert', async (req, res) => {
             author: req.body.author,
             img: req.body.img,
             description: req.body.description,
+            price: req.body.price,
             user_id: req.body.user_id,
             favorite: req.body.favorite
         })
@@ -202,7 +206,7 @@ app.get('/favorites/get-data', async (req, res) => {
     console.log("user id:", user_id);
 
     try {
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
         const cursor = favorites.find({user_id:  {$all:[user_id]}} );
 
@@ -239,7 +243,7 @@ app.get('/favorites/check', async(req, res) =>{
     }
 
     try{
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
         const book = await favorites.findOne(query);
 
@@ -263,7 +267,7 @@ app.post('/favorites/delete', async (req, res) => {
     await client.connect();
 
     try {
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
         const query = { "_id": new mongoose.mongo.ObjectId(id) };
 
@@ -288,7 +292,7 @@ app.get("/login", cors(), (req, res) => {
 app.post("/login", async (req, res) => {
     await client.connect();
     try {
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const users = database.collection("Users");
 
         const { email, password } = req.body;
@@ -318,7 +322,7 @@ app.post("/login", async (req, res) => {
 app.post("/register", async (req, res) => {
     await client.connect();
     try {
-        const database = client.db("CSCI-39548-Project");
+        //const database = client.db("CSCI-39548-Project");
         const users = database.collection("Users");
 
         const user = new userTemplateCopy({
@@ -364,5 +368,53 @@ app.post("/register", async (req, res) => {
 //         return res.status(401).json({ msg: "Unauthorized" });
 //     }
 // });
+
+
+//******************ORDERS******************
+app.post("/checkout/complete-order", async (req, res) => {
+    await client.connect();
+    try{
+        const orders = database.collection("Orders");
+        
+        const {user_id, book_order, order_total} = req.body;
+
+        const order = new orderTemplateCopy({
+            user_id: user_id,
+            book_order: book_order,
+            order_total: order_total
+        })
+
+        const result = await orders.insertOne(order);
+        console.log(`A document was inserted with the _id: ${result.insertedId}`);
+    } finally {
+        await client.close();
+    }
+
+})
+
+app.get("/order-history/get-orders", async(req, res) => {
+   console.log('getting order history....');
+    await client.connect();
+
+    var resultArr = [];
+
+    try{
+        const orders = database.collection("Orders");
+
+        const {user_id} = req.query;
+
+        const order = orders.find({user_id: {$all:[user_id]}});
+
+        let orderArr = await order.toArray();
+        if(orderArr.length == 0){
+            console.log("No documents found");
+        }
+        resultArr = orderArr;
+
+    } finally {
+        await client.close();
+        res.send(resultArr);
+    }
+})
 
 app.listen(5000, () => { console.log('Server listening on port 5000...') });
