@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 function Favorites() {
 
-  const [mongoDB, setMongoDB] = useState([{}]);
+  const [mongoDB, setMongoDB] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const user_id = useSelector((state) => state.user.value.user_id);
@@ -40,7 +40,7 @@ function Favorites() {
       {
         logged_in ?
           (
-            (typeof mongoDB[0].title === 'undefined') ?
+            (mongoDB === null) ?
               (
                 <p className='loading'>Loading...</p>
               ) :
