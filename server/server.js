@@ -199,26 +199,30 @@ app.post('/favorites/insert', async (req, res) => {
 app.get('/favorites/get-data', async (req, res) => {
     console.log("getting favorites...");
     await client.connect();
+
     var resultArr = [];
     
-    console.log(req.query);
-    const {user_id} = req.query;
-    console.log("user id:", user_id);
+    // console.log(req.query);
+    // const {user_id} = req.query;
+    // console.log("user id:", user_id);
 
     try {
         //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
+
+        const {user_id} = req.query;
+
         const cursor = favorites.find({user_id:  {$all:[user_id]}} );
 
-        if ((await cursor.count()) === 0) {
+        let faveArr = await cursor.toArray();
+
+        if (faveArr.length === 0) {
             console.log("No documents found");
         }
 
-        await cursor.forEach((doc) => {
-            resultArr.push(doc);
-        })
+        resultArr = faveArr;
+
     } finally {
-        await client.close();
         res.send(resultArr);
     }
 })
