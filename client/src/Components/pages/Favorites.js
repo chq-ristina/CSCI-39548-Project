@@ -23,7 +23,7 @@ function Favorites() {
     width: '99%'
   }
   //console.log("mongoDB:", mongoDB);
-  console.log("User ID:", user_id);
+  //console.log("User ID:", user_id);
 
   useEffect(() => {
     async function fetchData() {

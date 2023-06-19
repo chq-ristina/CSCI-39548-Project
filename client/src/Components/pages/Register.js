@@ -27,11 +27,11 @@ function Register() {
             setEmpty(true);
             if(exists) setExists(false);
             if(err) setErr(false);
-            console.log("not signing up!");
+            //console.log("not signing up!");
             return;
         }
         
-        console.log("signing up!");
+        //console.log("signing up!");
         const user ={
             email: email,
             password: password,

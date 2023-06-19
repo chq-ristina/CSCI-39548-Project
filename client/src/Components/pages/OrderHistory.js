@@ -27,9 +27,9 @@ function OrderHistory() {
 
     const toDate = (dateStr) => {
         const [day, month, year] = dateStr.split("-")
-        console.log("day:", day);
-        console.log("month:", month);
-        console.log("year:", year);
+        //console.log("day:", day);
+        //console.log("month:", month);
+        //console.log("year:", year);
         console.log("number month:", Number(month));
         return new Date(year, month - 1, day)
     }
@@ -42,8 +42,8 @@ function OrderHistory() {
         fetchData();
     }, []);
 
-    console.log("res:", res);
-    console.log("res type:", typeof (res));
+    //console.log("res:", res);
+    //console.log("res type:", typeof (res));
     return (
         <div className='font-link order-history'>
             {
@@ -61,16 +61,16 @@ function OrderHistory() {
                                 (
                                     // <p>Have orders</p>
                                     res.toReversed().map((order, key) => {
-                                        console.log(order);
+                                        //console.log(order);
                                         let total = parseFloat(order.order_total.$numberDecimal.toString());
 
                                         let [year, m, day] = order.date.substring(0, 10).split("-");
 
                                         m = Number(m);
                                         let month = monthNames[m - 1];
-                                        console.log("Month:", month);
-                                        console.log("Book order:", order.book_order);
-                                        console.log(typeof (order.book_order));
+                                        //console.log("Month:", month);
+                                        //console.log("Book order:", order.book_order);
+                                        //console.log(typeof (order.book_order));
 
                                         return (
                                             <div key={key} className='order'>
@@ -81,8 +81,8 @@ function OrderHistory() {
 
                                                 {
                                                     order.book_order.map((book, key) => {
-                                                        console.log(book);
-                                                        console.log(typeof (book.price));
+                                                        //console.log(book);
+                                                        //console.log(typeof (book.price));
                                                         return (
                                                             <div key={key} className='order-book'>
                                                                 <div className='order-left'>

@@ -17,7 +17,7 @@ function Home() {
  const user_id = useSelector((state) => state.user.value.user_id);
  const logged_in = useSelector((state) => state.user.value.logged_in);
  
-  console.log("User fname:", user_fname, "User id:", user_id, "Logged in:", logged_in);
+  //console.log("User fname:", user_fname, "User id:", user_id, "Logged in:", logged_in);
 
   useEffect(() => {
     dispatch(setSearchType({searchType: "Title"}));

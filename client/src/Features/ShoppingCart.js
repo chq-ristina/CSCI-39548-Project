@@ -9,8 +9,8 @@ export const shoppingCartSlice = createSlice({
         },
         removeFromCart: (state, action) => {
             //NEEDS FIXING
-            console.log(`removing ${action.payload} from cart!!!`);
-            console.log("index:",action.payload );
+            //console.log(`removing ${action.payload} from cart!!!`);
+            //console.log("index:",action.payload );
             if(action.payload !== -1){
                 state.value.shopping_cart.splice(action.payload, 1);
             }

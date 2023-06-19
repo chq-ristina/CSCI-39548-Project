@@ -30,11 +30,11 @@ function Login() {
             // setErrEmail(false);
             // setErrPass(false);
             if(errEmailPass)setErrEmailPass(false);
-            console.log("not logging in!");
+            //console.log("not logging in!");
             return;
         }
         
-        console.log("logging in!");
+        //console.log("logging in!");
         const user ={
             email: email,
             password: password,

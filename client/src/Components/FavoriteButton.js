@@ -33,7 +33,7 @@ function FavoriteButton(props) {
     .then(res => {
       //console.log("fave check res:", res.data);
       setFavorited(res.data.found);
-      console.log("favorited:", favorited);
+      //console.log("favorited:", favorited);
     });
   
 
@@ -48,7 +48,8 @@ function FavoriteButton(props) {
       favorite: !favorited
     }
     if (!favorited) {
-      axios.post('http://localhost:5000/favorites/insert', faveBook).then(response => console.log("Favorited: ", response.data))
+      axios.post('http://localhost:5000/favorites/insert', faveBook)
+        //.then(response => console.log("Favorited: ", response.data))
     }
     else {
       const response = await axios.get('http://localhost:5000/favorites/check',req);

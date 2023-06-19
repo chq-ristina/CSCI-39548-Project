@@ -13,16 +13,16 @@ function Checkout() {
     const history = useNavigate();
     const dispatch = useDispatch();
 
-    console.log("cart:", cart);
-    console.log("cart type:", typeof (cart));
+    //console.log("cart:", cart);
+    //console.log("cart type:", typeof (cart));
 
     let total = 0;
 
     const handleRemove = (key) => {
         // window.alert("hit removed!");
-        console.log("hit removed:", key);
+        //console.log("hit removed:", key);
         dispatch(removeFromCart(key));
-        console.log("new cart", cart);
+        //console.log("new cart", cart);
     }
 
     const handleOrder = async () => {
@@ -36,7 +36,7 @@ function Checkout() {
             try {
                 await axios.post("http://localhost:5000/checkout/complete-order", order)
                     .then(
-                        console.log("Ordered!!", user_id),
+                        //console.log("Ordered!!", user_id),
                         dispatch(emptyCart()),
                         history('/order-complete')
                     );
@@ -45,7 +45,7 @@ function Checkout() {
             }
         }
         dispatch(emptyCart());
-        console.log("ordered!!!!");
+        //console.log("ordered!!!!");
         history('/order-complete');
 
         //"/checkout/complete-order"
@@ -60,8 +60,8 @@ function Checkout() {
                             <h1>Checkout</h1>
                             <div className='checkout-left'>
                                 {cart.map((book, key) => {
-                                    console.log("Book:", book);
-                                    console.log("Key:", key);
+                                    //console.log("Book:", book);
+                                    //console.log("Key:", key);
                                     total += (book.price?.$numberDecimal !== undefined) ? book.price.$numberDecimal : book.price;
                                     return (
                                         <div key={key} className='c-l-parent'>
