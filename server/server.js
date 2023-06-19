@@ -76,32 +76,64 @@ app.get("/search/Title/:title", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=40`);
-    const book = await rawData.json();
-    // console.log(book);
-    let total = book.totalItems;
-    if (total > 0) {
-        let items = book.items; //list of all the books, probably will need to parse through the list
+    try {
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=40`)
+            .then((rawData) => {
+                const book = rawData.data;
+                let total = book.totalItems;
+                if (total > 0) {
+                    let items = book.items; //list of all the books, probably will need to parse through the list
 
-        for (var i = 0; i < total; i++) {
-            if (items[i]?.volumeInfo) {
-                let item = items[i].volumeInfo;
-                var data = new Object();
+                    for (var i = 0; i < total; i++) {
+                        if (items[i]?.volumeInfo) {
+                            let item = items[i].volumeInfo;
+                            var data = new Object();
 
-                item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-                item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-                item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-                item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+                            item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+                            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+                            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+                            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
-                results.push(data);
-            }
+                            results.push(data);
+                        }
 
-        }
+                    }
+                }
+                let temp = results;
+                //console.log("debug: ", temp);
+                results = [];
+                res.send(temp);
+            })
+    } catch (e) {
+        console.log(e);
     }
-    let temp = results;
-    //console.log("debug: ", temp);
-    results = [];
-    res.send(temp);
+
+    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=40`);
+    // const book = await rawData.json();
+    // // console.log(book);
+    // let total = book.totalItems;
+    // if (total > 0) {
+    //     let items = book.items; //list of all the books, probably will need to parse through the list
+
+    //     for (var i = 0; i < total; i++) {
+    //         if (items[i]?.volumeInfo) {
+    //             let item = items[i].volumeInfo;
+    //             var data = new Object();
+
+    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+
+    //             results.push(data);
+    //         }
+
+    //     }
+    // }
+    // let temp = results;
+    // //console.log("debug: ", temp);
+    // results = [];
+    // res.send(temp);
 })
 
 app.get("/search/Author/:author", async (req, res) => {
@@ -110,32 +142,63 @@ app.get("/search/Author/:author", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&maxResults=40`);
-    const book = await rawData.json();
+    try {
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&maxResults=40`)
+            .then((rawData) => {
+                const book = rawData.data;
+                let total = book.totalItems;
+                if (total > 0) {
+                    let items = book.items; //list of all the books, probably will need to parse through the list
 
-    let total = book.totalItems;
-    if (total > 0) {
-        let items = book.items; //list of all the books, probably will need to parse through the list
+                    for (var i = 0; i < total; i++) {
+                        if (items[i]?.volumeInfo) {
+                            let item = items[i].volumeInfo;
+                            var data = new Object();
 
-        for (var i = 0; i < total; i++) {
-            if (items[i]?.volumeInfo) {
-                let item = items[i].volumeInfo;
-                var data = new Object();
+                            item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+                            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+                            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+                            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
 
-                item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-                item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-                item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-                item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+                            results.push(data);
 
-                results.push(data);
+                        }
 
-            }
-
-        }
+                    }
+                }
+                let temp = results;
+                results = [];
+                res.send(temp);
+            })
+    } catch (e) {
+        console.log(e);
     }
-    let temp = results;
-    results = [];
-    res.send(temp);
+    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&maxResults=40`);
+    // const book = await rawData.json();
+
+    // let total = book.totalItems;
+    // if (total > 0) {
+    //     let items = book.items; //list of all the books, probably will need to parse through the list
+
+    //     for (var i = 0; i < total; i++) {
+    //         if (items[i]?.volumeInfo) {
+    //             let item = items[i].volumeInfo;
+    //             var data = new Object();
+
+    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+
+    //             results.push(data);
+
+    //         }
+
+    //     }
+    // }
+    // let temp = results;
+    // results = [];
+    // res.send(temp);
 })
 
 app.get("/search/Genre/:genre", async (req, res) => {
@@ -144,32 +207,63 @@ app.get("/search/Genre/:genre", async (req, res) => {
         res.send(results);
     }
 
-    const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=40`);
-    const book = await rawData.json();
-
-    let total = book.totalItems;
-    if (total > 0) {
-        let items = book.items; //list of all the books, probably will need to parse through the list
-
-        for (var i = 0; i < total; i++) {
-            if (items[i]?.volumeInfo) {
-                let item = items[i].volumeInfo;
-                var data = new Object();
-
-                item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-                item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-                item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-                item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
-
-                results.push(data);
-
-            }
-
-        }
+    try{
+        axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=40`)
+            .then((rawData) => {
+                const book = rawData.data;
+                let total = book.totalItems;
+                if (total > 0) {
+                    let items = book.items; //list of all the books, probably will need to parse through the list
+            
+                    for (var i = 0; i < total; i++) {
+                        if (items[i]?.volumeInfo) {
+                            let item = items[i].volumeInfo;
+                            var data = new Object();
+            
+                            item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+                            item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+                            item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+                            item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+            
+                            results.push(data);
+            
+                        }
+            
+                    }
+                }
+                var temp = results;
+                res.send(temp);
+                results = [];
+            })
+    } catch (e){
+        console.log(e);
     }
-    var temp = results;
-    res.send(temp);
-    results = [];
+    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=40`);
+    // const book = await rawData.json();
+
+    // let total = book.totalItems;
+    // if (total > 0) {
+    //     let items = book.items; //list of all the books, probably will need to parse through the list
+
+    //     for (var i = 0; i < total; i++) {
+    //         if (items[i]?.volumeInfo) {
+    //             let item = items[i].volumeInfo;
+    //             var data = new Object();
+
+    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
+    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
+    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
+    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
+
+    //             results.push(data);
+
+    //         }
+
+    //     }
+    // }
+    // var temp = results;
+    // res.send(temp);
+    // results = [];
 })
 
 
@@ -203,7 +297,7 @@ app.get('/favorites/get-data', async (req, res) => {
     await client.connect();
 
     var resultArr = [];
-    
+
     // console.log(req.query);
     // const {user_id} = req.query;
     // console.log("user id:", user_id);
@@ -212,9 +306,9 @@ app.get('/favorites/get-data', async (req, res) => {
         //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
 
-        const {user_id} = req.query;
+        const { user_id } = req.query;
 
-        const cursor = favorites.find({user_id:  {$all:[user_id]}} );
+        const cursor = favorites.find({ user_id: { $all: [user_id] } });
 
         let faveArr = await cursor.toArray();
 
@@ -229,10 +323,10 @@ app.get('/favorites/get-data', async (req, res) => {
     }
 })
 
-app.get('/favorites/check', async(req, res) =>{
+app.get('/favorites/check', async (req, res) => {
     await client.connect();
 
-    const {title, author, img, description, user_id } = req.query;
+    const { title, author, img, description, user_id } = req.query;
 
     // console.log("title:", title);
     // console.log("author:", author);
@@ -248,21 +342,21 @@ app.get('/favorites/check', async(req, res) =>{
         user_id: user_id
     }
 
-    try{
+    try {
         //const database = client.db("CSCI-39548-Project");
         const favorites = database.collection("Favorites");
         const book = await favorites.findOne(query);
 
         // console.log("book:",book);
-        if(book){
-            res.json({found: true, insertID: book._id});
-        }else{
-            res.json({found: false});
+        if (book) {
+            res.json({ found: true, insertID: book._id });
+        } else {
+            res.json({ found: false });
         }
     } /*finally{
         await client.close();
     }*/
-    catch (e){
+    catch (e) {
         console.log(e);
     }
 })
@@ -308,15 +402,15 @@ app.post("/login", async (req, res) => {
             const result = await bcrypt.compare(password, user.password);
 
             if (result) {
-                res.json({msg: "exists", user_id: user._id, fname: user.fname});
+                res.json({ msg: "exists", user_id: user._id, fname: user.fname });
                 console.log("User exists");
             }
             else {
-                res.json({msg: "wrong password"});
+                res.json({ msg: "wrong password" });
                 console.log("User does not exist: password");
             }
         } else {
-            res.json({msg: "wrong email"});
+            res.json({ msg: "wrong email" });
             console.log("User does not exist: email")
         }
 
@@ -341,15 +435,15 @@ app.post("/register", async (req, res) => {
         const check = await users.findOne({ email: req.body.email });
 
         if (check) {
-            res.json({msg: "exists"})
+            res.json({ msg: "exists" })
         } else {
             //Hash password
             const hash = await bcrypt.hash(user.password, 12);
             user.password = hash;
-           
+
             const result = await users.insertOne(user);
             console.log(`A document was inserted with the _id: ${result.insertedId}`)
-            res.json({msg: "doesn't exist", user_id: result.insertedId, fname: user.fname});
+            res.json({ msg: "doesn't exist", user_id: result.insertedId, fname: user.fname });
         }
 
     } finally {
@@ -379,10 +473,10 @@ app.post("/register", async (req, res) => {
 //******************ORDERS******************
 app.post("/checkout/complete-order", async (req, res) => {
     await client.connect();
-    try{
+    try {
         const orders = database.collection("Orders");
-        
-        const {user_id, book_order, order_total} = req.body;
+
+        const { user_id, book_order, order_total } = req.body;
 
         const order = new orderTemplateCopy({
             user_id: user_id,
@@ -398,21 +492,21 @@ app.post("/checkout/complete-order", async (req, res) => {
 
 })
 
-app.get("/order-history/get-orders", async(req, res) => {
-   console.log('getting order history....');
+app.get("/order-history/get-orders", async (req, res) => {
+    console.log('getting order history....');
     await client.connect();
 
     var resultArr = [];
 
-    try{
+    try {
         const orders = database.collection("Orders");
 
-        const {user_id} = req.query;
+        const { user_id } = req.query;
 
-        const order = orders.find({user_id: {$all:[user_id]}});
+        const order = orders.find({ user_id: { $all: [user_id] } });
 
         let orderArr = await order.toArray();
-        if(orderArr.length == 0){
+        if (orderArr.length == 0) {
             console.log("No documents found");
         }
         resultArr = orderArr;
