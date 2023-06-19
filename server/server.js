@@ -108,32 +108,6 @@ app.get("/search/Title/:title", async (req, res) => {
         console.log(e);
     }
 
-    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${title}&maxResults=40`);
-    // const book = await rawData.json();
-    // // console.log(book);
-    // let total = book.totalItems;
-    // if (total > 0) {
-    //     let items = book.items; //list of all the books, probably will need to parse through the list
-
-    //     for (var i = 0; i < total; i++) {
-    //         if (items[i]?.volumeInfo) {
-    //             let item = items[i].volumeInfo;
-    //             var data = new Object();
-
-    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
-
-    //             results.push(data);
-    //         }
-
-    //     }
-    // }
-    // let temp = results;
-    // //console.log("debug: ", temp);
-    // results = [];
-    // res.send(temp);
 })
 
 app.get("/search/Author/:author", async (req, res) => {
@@ -173,32 +147,6 @@ app.get("/search/Author/:author", async (req, res) => {
     } catch (e) {
         console.log(e);
     }
-    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=inauthor:${author}&maxResults=40`);
-    // const book = await rawData.json();
-
-    // let total = book.totalItems;
-    // if (total > 0) {
-    //     let items = book.items; //list of all the books, probably will need to parse through the list
-
-    //     for (var i = 0; i < total; i++) {
-    //         if (items[i]?.volumeInfo) {
-    //             let item = items[i].volumeInfo;
-    //             var data = new Object();
-
-    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
-
-    //             results.push(data);
-
-    //         }
-
-    //     }
-    // }
-    // let temp = results;
-    // results = [];
-    // res.send(temp);
 })
 
 app.get("/search/Genre/:genre", async (req, res) => {
@@ -238,32 +186,6 @@ app.get("/search/Genre/:genre", async (req, res) => {
     } catch (e){
         console.log(e);
     }
-    // const rawData = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:${genre}&maxResults=40`);
-    // const book = await rawData.json();
-
-    // let total = book.totalItems;
-    // if (total > 0) {
-    //     let items = book.items; //list of all the books, probably will need to parse through the list
-
-    //     for (var i = 0; i < total; i++) {
-    //         if (items[i]?.volumeInfo) {
-    //             let item = items[i].volumeInfo;
-    //             var data = new Object();
-
-    //             item.hasOwnProperty('title') ? (data.title = item.title) : data.title = null;
-    //             item.hasOwnProperty('authors') ? (data.author = item.authors) : data.author = null;
-    //             item.hasOwnProperty('description') ? (data.description = item.description) : data.description = null;
-    //             item.hasOwnProperty('imageLinks') ? (data.img = item.imageLinks.thumbnail) : data.img = null;
-
-    //             results.push(data);
-
-    //         }
-
-    //     }
-    // }
-    // var temp = results;
-    // res.send(temp);
-    // results = [];
 })
 
 
