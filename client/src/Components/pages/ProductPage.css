@@ -19,6 +19,7 @@
     /* border: 2px solid black; */
     overflow: hidden;
     color: rgb(52, 52, 52);
+    width: 99%;
 }
 
 .left {
@@ -29,7 +30,7 @@
 }
 
 .right {
-    /* border: 2px solid red; */
+    /* border: 2px solid orange; */
     width: 65%;
     float: right;
 }

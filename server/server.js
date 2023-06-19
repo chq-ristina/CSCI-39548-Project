@@ -7,6 +7,7 @@ const dotenv = require('dotenv')
 // const MongoDBStore = require("connect-mongodb-session")(session);
 // const router = express.Router();
 const bcrypt = require("bcryptjs");
+const axios = require('axios')
 
 const bookTemplateCopy = require('./models/BookModels')
 const userTemplateCopy = require('./models/UserModels')
@@ -197,7 +198,7 @@ app.post('/favorites/insert', async (req, res) => {
 })
 
 app.get('/favorites/get-data', async (req, res) => {
-    console.log("getting favorites...");
+    //console.log("getting favorites...");
     await client.connect();
 
     var resultArr = [];
@@ -267,7 +268,7 @@ app.get('/favorites/check', async(req, res) =>{
 
 app.post('/favorites/delete', async (req, res) => {
     var id = req.body.id;
-    console.log("id", id);
+    //console.log("id", id);
     await client.connect();
 
     try {

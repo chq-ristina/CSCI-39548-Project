@@ -5,6 +5,7 @@ import './Search.css';
 import { isEmpty } from "lodash";
 import FavoriteButton from '../FavoriteButton';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Search() {
   const searchWord = useSelector((state) => state.searchWord.value);
@@ -17,10 +18,10 @@ function Search() {
   const [backendData, setBackendData] = useState([{}])
   useEffect(() => {
     async function fetchData() {
-      console.log("calling fetch data..");
+      //console.log("calling fetch data..");
       const response = await fetch(`http://localhost:5000/search/${searchType.searchType}/${searchWord.searchWord}`);
       const data = await response.json();
-      console.log("debug:", data);
+      // console.log("debug:", data);
       setBackendData(data);
     }
     fetchData();

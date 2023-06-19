@@ -27,7 +27,7 @@ function Navbar() {
   useEffect(() => {
     // execute on location change
     setOpen(false);
-    console.log('Location changed!', location.pathname);
+    //console.log('Location changed!', location.pathname);
   }, [location]);
 
   const handleLogOut = () => {

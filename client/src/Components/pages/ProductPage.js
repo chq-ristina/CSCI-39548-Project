@@ -12,7 +12,7 @@ function ProductPage() {
 
   const dispatch = useDispatch();
   const shopping_cart = useSelector((state) => state.shoppingCart.value.shopping_cart);
-  console.log("Shopping Cart:", shopping_cart);
+  //console.log("Shopping Cart:", shopping_cart);
 
   let authorString = "";
 
@@ -36,16 +36,16 @@ function ProductPage() {
     price: props.price
   }
 
-  console.log(book);
-  if(book.price?.$numberDecimal !== undefined){
-    console.log("book.price.$numberDecimal =", book.price.$numberDecimal);
-  }else{
-  console.log("book.price =", book.price);
-  }
+  // console.log(book);
+  // if(book.price?.$numberDecimal !== undefined){
+  //   console.log("book.price.$numberDecimal =", book.price.$numberDecimal);
+  // }else{
+  // console.log("book.price =", book.price);
+  // }
 
   const handleClick = () => {
     dispatch(addToCart(book));
-    console.log("Shopping cart:", shopping_cart);
+    //console.log("Shopping cart:", shopping_cart);
     window.alert(`Added ${book.title} by ${authorString} to cart!`);
   }
 

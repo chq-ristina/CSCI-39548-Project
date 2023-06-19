@@ -16,8 +16,8 @@ function SearchBar({ placeholder }) {
     }
 
     const handleClick = () => {
-        console.log("clicked!");
-        console.log("curSearch =", curSearch);
+        //console.log("clicked!");
+        //console.log("curSearch =", curSearch);
         if (curSearch !== undefined) {
             dispatch(setSearchWord({ searchWord: encodeURI(curSearch) }));
             history("/search");
