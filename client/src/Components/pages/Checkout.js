@@ -34,7 +34,7 @@ function Checkout() {
             }
 
             try {
-                await axios.post("http://localhost:5000/checkout/complete-order", order)
+                await axios.post("https://nobles-and-barnes-api.onrender.com/checkout/complete-order", order)
                     .then(
                         //console.log("Ordered!!", user_id),
                         dispatch(emptyCart()),

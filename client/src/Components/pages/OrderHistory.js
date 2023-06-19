@@ -36,7 +36,7 @@ function OrderHistory() {
 
     useEffect(() => {
         async function fetchData() {
-            await axios.get(`http://localhost:5000/order-history/get-orders?user_id=${user_id}`)
+            await axios.get(`https://nobles-and-barnes-api.onrender.com/order-history/get-orders?user_id=${user_id}`)
                 .then((response) => setRes(response.data))
         }
         fetchData();

@@ -10,6 +10,9 @@ import SearchWordReducer from './Features/SearchWord';
 import favoritingReducer from './Features/Favoriting';
 import userReducer from './Features/User';
 import shoppingCartReducer from './Features/ShoppingCart';
+import { disableReactDevTools } from '@fvilers/disable-react-devtools';
+
+if(process.env.NODE_ENV === 'production') disableReactDevTools()
 
 const store = configureStore({
   reducer: {
@@ -18,7 +21,8 @@ const store = configureStore({
     favoriting: favoritingReducer,
     user: userReducer,
     shoppingCart: shoppingCartReducer
-  }
+  },
+  devTools: false
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

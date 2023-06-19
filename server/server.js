@@ -7,14 +7,15 @@ const dotenv = require('dotenv')
 // const MongoDBStore = require("connect-mongodb-session")(session);
 // const router = express.Router();
 const bcrypt = require("bcryptjs");
-const axios = require('axios')
+const axios = require('axios');
+const corsOptions = require('./config/corsOptions')
 
 const bookTemplateCopy = require('./models/BookModels')
 const userTemplateCopy = require('./models/UserModels')
 const orderTemplateCopy = require('./models/OrderModel')
-
+const PORT = process.env.PORT || 5000
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 dotenv.config()
 
@@ -422,4 +423,4 @@ app.get("/order-history/get-orders", async(req, res) => {
     }
 })
 
-app.listen(5000, () => { console.log('Server listening on port 5000...') });
+app.listen(PORT, () => { console.log(`Server listening on port ${PORT}...`) });

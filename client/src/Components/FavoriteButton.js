@@ -29,7 +29,7 @@ function FavoriteButton(props) {
   }
 
   //check if it is already a favorite book
-  axios.get('http://localhost:5000/favorites/check',req)
+  axios.get('https://nobles-and-barnes-api.onrender.com/favorites/check',req)
     .then(res => {
       //console.log("fave check res:", res.data);
       setFavorited(res.data.found);
@@ -48,14 +48,14 @@ function FavoriteButton(props) {
       favorite: !favorited
     }
     if (!favorited) {
-      axios.post('http://localhost:5000/favorites/insert', faveBook)
+      axios.post('https://nobles-and-barnes-api.onrender.com/favorites/insert', faveBook)
         //.then(response => console.log("Favorited: ", response.data))
     }
     else {
-      const response = await axios.get('http://localhost:5000/favorites/check',req);
+      const response = await axios.get('https://nobles-and-barnes-api.onrender.com/favorites/check',req);
       if(response.data.found){
         console.log('deleting...');
-        axios.post('http://localhost:5000/favorites/delete', 
+        axios.post('https://nobles-and-barnes-api.onrender.com/favorites/delete', 
         {
           id: response.data.insertID
         });

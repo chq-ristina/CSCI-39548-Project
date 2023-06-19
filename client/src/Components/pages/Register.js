@@ -40,7 +40,7 @@ function Register() {
         }
 
         try{
-            await axios.post("http://localhost:5000/register",user)
+            await axios.post("https://nobles-and-barnes-api.onrender.com/register",user)
             .then(res => {
                 if(res.data.msg === "exists"){
                     // alert("Account already exists")

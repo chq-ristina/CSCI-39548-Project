@@ -19,7 +19,7 @@ function Search() {
   useEffect(() => {
     async function fetchData() {
       //console.log("calling fetch data..");
-      const response = await fetch(`http://localhost:5000/search/${searchType.searchType}/${searchWord.searchWord}`);
+      const response = await fetch(`https://nobles-and-barnes-api.onrender.com/search/${searchType.searchType}/${searchWord.searchWord}`);
       const data = await response.json();
       // console.log("debug:", data);
       setBackendData(data);
