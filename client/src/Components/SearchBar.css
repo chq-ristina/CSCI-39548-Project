@@ -42,3 +42,25 @@ input:focus{
 .searchIcon svg{
     font-size: 35px;
 }
+
+@media (max-width: 768px){
+    .search input{
+        width: 350px;
+    }
+
+    .searchIcon{
+        width: 30px;
+        font-size: 5vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .search input{
+        width: 300px;
+    }
+
+    .searchIcon{
+        width: 30px;
+        font-size: 5vh;
+    }
+}
