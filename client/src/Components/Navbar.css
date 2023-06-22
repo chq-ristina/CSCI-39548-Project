@@ -75,3 +75,82 @@
 #root > div > nav > div > div.navbar-right > div > div.navbar-menu-container > ul > li :visited{
     color:black;
 }
+
+@media (max-width: 768px){
+    .nobles-barnes{
+        font-size: 3vh;
+    }
+
+    .nobles-barnes svg{
+        font-size: medium;
+    }
+    .navbar-right{
+        width: 55%;
+    }
+
+    .navbar-right svg{
+        font-size: medium;
+    }
+    
+    #root > div > nav > div > div.navbar-right > div.navbar-fave-container > a > span{
+        font-size: 3vh;
+    }
+
+    .navbar-account .menu{
+        width: 20%;
+    }
+
+    #root > div > nav > div > div.navbar-right > div.navbar-account > div.navbar-menu-container > ul > li{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 522px){
+    .navbar-left{
+        width: 35%;
+    }
+
+    .nobles-barnes{
+        font-size: 3vh;
+    }
+
+    .nobles-barnes svg{
+        font-size: smaller;
+    }
+
+    #root > div > nav > div > div.navbar-right > div.navbar-account > div.navbar-menu-container > ul > li{
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 480px){
+    .navbar-left{
+        width: 35%;
+    }
+    .nobles-barnes{
+        font-size: 3vh;
+    }
+
+    #root > div > nav > div > div.navbar-left > a > svg{
+        font-size: smaller;
+    }
+    .navbar-right{
+        width: 55%;
+    }
+
+    .navbar-right svg{
+        font-size: smaller;
+    }
+    
+    #root > div > nav > div > div.navbar-right > div.navbar-fave-container > a > span{
+        font-size: 3vh;
+    }
+
+    .navbar-account .menu{
+        width: 20%;
+    }
+
+    #root > div > nav > div > div.navbar-right > div.navbar-account > div.navbar-menu-container > ul > li{
+        font-size: 11px;
+    }
+}
