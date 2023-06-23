@@ -73,3 +73,48 @@
 /* #root>div>div>div.right>div.buy>button:hover{
     background-color: rgb(9, 86, 55);
 } */
+
+@media (max-width: 480px){
+    .parent{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .left{
+        width:auto;
+    }
+
+    .left button {
+        margin-top: 5px;
+    }
+
+    .left div{
+        margin-bottom: 5px;
+    }
+    .right{
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right .title{
+        text-align: center;
+    }
+    .buy{
+        width: 50%;
+    }
+
+    .buy-left{
+        /* border: 2px solid red; */
+        float: left;
+    }
+
+    .buy-right{
+        /* border: 2px solid blue; */
+    }
+    /* .left img{
+        width: 40vw;
+    } */
+}
