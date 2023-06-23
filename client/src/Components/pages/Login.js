@@ -41,8 +41,7 @@ function Login() {
         }
 
         try{
-            //await axios.post("https://nobles-and-barnes-api.onrender.com/login", user)
-            await axios.post("http://localhost:5000/login", user)
+            await axios.post("https://nobles-and-barnes-api.onrender.com/login", user)
             .then(res => {
                 if(res.data.msg === "exists"){
                     dispatch(setUser({user_id: res.data.user_id, fname: res.data.fname}))
