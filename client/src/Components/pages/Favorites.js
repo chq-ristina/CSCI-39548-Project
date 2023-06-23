@@ -27,7 +27,8 @@ function Favorites() {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch(`https://nobles-and-barnes-api.onrender.com/favorites/get-data?user_id=${user_id}`);
+      //const response = await fetch(`https://nobles-and-barnes-api.onrender.com/favorites/get-data?user_id=${user_id}`);
+      const response = await fetch(`http://localhost:5000/favorites/get-data?user_id=${user_id}`);
       const data = await response.json();
       const filteredData = data.filter(bookData => bookData.favorite);
       setMongoDB(filteredData);
