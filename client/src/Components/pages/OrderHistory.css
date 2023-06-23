@@ -42,3 +42,24 @@
     width: 87%;
     float: right;
 }
+
+@media (max-width: 768px){
+    .order-right{
+        width: 65%;
+    }
+}
+
+@media (max-width: 480px){
+    .order-right{
+        width: 55%;
+    }
+
+    .order-left img{
+        height: 30vh;
+        width: 25vw;
+    }
+
+    .order-info{
+        text-align: center;
+    }
+}
