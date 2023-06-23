@@ -72,7 +72,7 @@ function Search() {
                   }
                   
                   return (
-                    <div key={key}>
+                    <div key={key} className='search-result'>
                       <div className='search-imgDescription'>
                         <Link to='/product' state={{ props: bookWithPrice }}>
                           <img src={image} width="128" height="192" />
@@ -80,6 +80,7 @@ function Search() {
 
                         <FavoriteButton
                           props={bookWithPrice} />
+                        <p className='search-price'><strong>${bookWithPrice.price}</strong></p>
                         <p className="search-description">{description}</p>
                       </div>
                       <div className='search-words'>

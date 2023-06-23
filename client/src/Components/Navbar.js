@@ -42,7 +42,7 @@ function Navbar() {
         <div className="navbar-container">
           <div className='navbar-left'>
             <Link style={{ textDecoration: 'none' }} to='/' className="navbar-logo">
-              <span className="font-link">
+              <span className="font-link nobles-barnes">
                 Nobles & Barnes
               </span>
               <MenuBookIcon />

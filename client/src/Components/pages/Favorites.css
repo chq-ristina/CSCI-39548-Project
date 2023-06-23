@@ -11,3 +11,10 @@
     color: black;
     font-size: 15vh;
 }
+
+@media (max-width: 480px){
+    .favorites-Favorites{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

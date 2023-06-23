@@ -12,6 +12,7 @@
 }
 
 .search-imgDescription{
+    /* border: 2px solid red; */
     display: flex;
 }
 
@@ -22,6 +23,13 @@
 
 .search-imgDescription p{
     margin: 0;
+}
+
+.search-price{
+    /* border: 2px solid orange; */
+    text-align: center;
+    padding-top: 75px;
+    padding-right: 10px;
 }
 
 .search-imgDescription button{
@@ -39,7 +47,7 @@
     color:rgb(9, 86, 55);
     
 }
-.search-description, .search-author{
+.search-description, .search-author, .search-price{
     color:rgb(52, 52, 52);
 }
 .search-author{
@@ -49,6 +57,7 @@
 }
 
 .search-words{
+    /* border: 2px solid blue; */
     /*background-color: pink;*/
     margin:0px;
     line-height: 1;
@@ -71,4 +80,74 @@
 
 #root > div > span > div > div.load-more > button:hover{
     background-color: rgb(42, 125, 107);
+}
+
+@media (max-width: 768px){
+    .search-imgDescription img{
+        height: 50vh;
+        width: 35vh;
+    }
+
+    .search-description{
+        font-size: 3vh;
+    }
+
+    .search-words{
+        font-size: 3vh;
+    }
+
+    .search-price{
+        padding-top: 150px;
+    }
+
+    .search-imgDescription button{
+        margin-top: 150px;
+    }
+}
+
+@media (max-width: 480px){
+    .search-imgDescription{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .search-imgDescription button{
+        /* border:2px solid black; */
+        /* background-color: #e5e6cc;
+        color:rgb(207, 57, 57);
+        cursor: pointer;
+        height: 25px; */
+        width: 40px;
+        padding:0;
+        margin-top: 0;
+        margin-bottom: 10px;
+    }
+
+    .search-imgDescription img{
+        /* border:2px solid black;
+        margin-left: 75px; */
+        margin-bottom: 10px;
+    }
+
+    .search-result{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .search-words{
+        text-align: center;
+        padding-bottom: 0;
+    }
+
+    .search-author{
+        margin-bottom:2px;
+    }
+
+    .search-price{
+        padding: 5px;
+    }
 }
